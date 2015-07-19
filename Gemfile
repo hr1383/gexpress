@@ -10,6 +10,8 @@ gem 'angularjs-rails', '~> 1.2.25'
 gem 'bootstrap-sass', '~> 3.2.0.2'
 gem "font-awesome-rails"
 gem 'rails_12factor'
+gem 'bxslider-rails'
+
 gem 'quiet_assets', group: :development
 
 # Use SCSS for stylesheets

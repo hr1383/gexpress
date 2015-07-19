@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require bxslider
 //= require angular
 //= require angular-resource
 //= require bootstrap-sprockets
