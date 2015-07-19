@@ -1,0 +1,118 @@
+@media only screen and (min-width: 1200px) and (max-width: 1600px) {
+	.slider .carousel-caption img {
+		left: 0;
+	}
+}
+
+
+
+@media only screen and (max-width: 767px) {
+	.logo {
+		text-align: center;
+	}
+	header {
+		padding-bottom: 0;
+	}
+	.header-fixed .logo {
+		display: none;
+	}
+	header .nav-toggler {
+		display: block;
+	}
+	header.header-fixed .nav-toggler {
+		margin: 0 auto;
+	}
+	header nav.mainmenu > ul {
+		padding-bottom: 20px;
+		overflow-y: auto;
+		height: 150px;
+	}
+	header nav.mainmenu ul {
+		display: none;
+	}
+	header nav.mainmenu ul li {
+		display: block;
+		margin: 0;
+		margin-bottom: 5px;
+	}
+	header nav.mainmenu ul li a {
+		padding: 5px 15px;
+		margin: auto;
+		width: 65%;
+		display: block;
+		text-align: center;
+	}
+	header.header-fixed nav.mainmenu ul li a {
+		line-height: 32px;
+		
+	}
+	.slider .item > img {
+		height: 200px;
+	}
+	.slider .carousel-caption img {
+		width: 34%;
+		left: 0;
+		top: 53%;
+	}
+	.slider .carousel-caption h1 {
+		right: 0%;
+		top: 22%;
+		font-size: 12px;
+		line-height: 30px;
+	}
+	.slider .carousel-caption h2 {
+		right: 0px;
+		top: 38%;
+		font-size: 12px;
+		line-height: 30px;
+	}
+	.slider .carousel-caption button {
+		right: 20%;
+		top: 56%;
+		font-size: 13px;
+		line-height: 33px;
+	}
+	.slider .carousel-caption button:after {
+		border-top: 17px solid transparent;
+		border-bottom: 17px solid transparent;
+		border-left: 17px solid #79C060;
+		right: -14px;
+	}
+	#service .single-service {
+		margin-bottom: 35px;
+	}
+	#select-phone .col-lg-4 {
+		display: block;
+		margin-bottom: 35px;
+	}
+	#service .single-service-bounce-bg {
+		display: block;
+	}
+	#testimonials .owl-thumbs {
+		display: none;
+	}
+	#testimonials .content-wrap p {
+		padding: 0 10px;
+	}
+	#testimonials .client-wrap .star-mark {
+		display: block;
+		margin: 0;
+	}
+	footer .widget {
+		margin-bottom: 35px;
+	}
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+	#service .single-service {
+		width: 85%;
+		margin: 0 7.5%;
+		margin-bottom: 35px;
+	}
+	#select-phone .col-lg-4 {
+		display: block;
+		width: 85%;
+		margin: 0 7.5%;
+		margin-bottom: 35px;
+	}
+}
