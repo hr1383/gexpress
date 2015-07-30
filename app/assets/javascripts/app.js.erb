@@ -1,23 +1,15 @@
 var gexpress = angular.module('gexpress', ['ngResource','ngRoute']);
 
-gexpress.config(function($routeProvider, $locationProvider) {
+gexpress.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
-  // $routeProvider
-  // /:device/:carrier/:size/:condition/offer
-    // .when('/abc', { templateUrl: "<%= asset_path('offer/price.html') %> ",
-        // controller: "offercontroller" })
   $routeProvider
     .when("/sell", { templateUrl: "/assets/welcome/sell.html"})
     .when("/:device/:carrier/:memory/:condition/offer", { templateUrl: "/assets/offer.html"})    
     .otherwise({ redirectTo: "/" });
-  });
+  }]);
 
-gexpress.config(function($httpProvider) {
-  $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
-});
 
-gexpress.controller("offercontroller",['$scope', '$http', '$routeParams',
- function($scope, $http, $routeParams) {
+gexpress.controller("offercontroller",['$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
     console.log($routeParams);
       var url = "/sku/"+$routeParams['device']+'/'+$routeParams['carrier']+'/'+$routeParams['memory']
                 +'/'+$routeParams['condition']+"/price.json";
