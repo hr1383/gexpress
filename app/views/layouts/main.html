@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Gadget Experss || Bootstrap HTML Template</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gexpress</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body ng-app="gexpress">
+	<!-- header -->
+	<header>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 logo">
+					<a href="#">
+						<img ng-src='<%=asset_path("img/logo.png")%>' alt="Logo image">
+					</a>
+				</div>
+				<nav class="col-lg-8 mainmenu">
+					<button class="nav-toggler hvr-bounce-to-right"><i class="fa fa-bars"></i> Navigation</button>
+					<ul>
+						<li class="active"><a href="index">HOME</a></li>
+						<li><a href="about">ABOUT US</a></li>
+					<!-- 	<li><a href="#">OUR SERVICES</a></li> -->
+						<li><a href="sell">SELL PHONE</a></li>
+						<!-- <li><a href="#">BUY PHONE</a></li> -->
+						<li><a href="contact">CONTACT US</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</header> <!-- /header -->
+<%= yield %>
+<footer>
+		<div class="container">
+			<div class="row">
+				<!-- .about-txt -->
+				<div class="col-lg-3 about-txt widget wow zoomIn" data-wow-delay="0s">
+					<h4>About Us</h4>
+					<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. </p>
+				</div> <!-- /.about-txt -->
+				<!-- .site-map -->
+				<div class="col-lg-5 site-map widget wow zoomIn" data-wow-delay="1s">
+					<h4>Sitemap</h4>
+					<div class="row">
+						<ul class="col-xs-4">
+							<li><a href="#">Home</a></li>
+							<li><a href="#">Select Device</a></li>
+							<li><a href="#">Buy Phone</a></li>
+							<li><a href="#">How it Works</a></li>
+						</ul>
+						<ul class="col-xs-4">
+							<li><a href="#">Help</a></li>
+							<li><a href="#">Privacy Policy</a></li>
+							<li><a href="#">Terms of Use</a></li>
+							<li><a href="#">Sell Phone</a></li>
+						</ul>
+						<ul class="col-xs-4">
+							<li><a href="#">FAQ</a></li>
+							<li><a href="#">Features</a></li>
+							<li><a href="#">Support Center</a></li>
+							<li><a href="contact-page.html">CONTACT US</a></li>
+						</ul>
+					</div>
+				</div> <!-- /.site-map -->
+				<!-- .subscribe -->
+				<div class="col-lg-4 subscribe widget wow zoomIn" data-wow-delay="2s">
+					<h4>Subscribe to our newsletter</h4>
+					<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt:</p>
+					<form class="subscribe" action="#">
+						<input placeholder="enter your email" type="text">
+						<button type="submit" class="hvr-bounce-to-right">SUBSCIRBE</button>
+					</form>
+				</div> <!-- /.subscribe -->
+			</div>
+		</div>
+	</footer>
+	<!-- #footer-bar -->
+	<section id="footer-bar">
+		<div class="container">
+			<div class="row">
+				<div class="copyright pull-left">
+					<p>Copyright &copy; <a href="#">The Gadgetexpress.com</a> | All Rights Reserved</p>
+				</div>
+				<div class="social pull-right">
+					<ul>
+						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+						<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+						<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section> <!-- /#footer-bar -->
+</body>
+</html>
