@@ -9,14 +9,14 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body ng-app="gexpress">
 	<!-- header -->
 	<header>
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-4 logo">
 					<a href="#">
-						<img src="img/logo.png" alt="Logo image	">
+						<img ng-src='<%=asset_path("img/logo.png")%>' alt="Logo image">
 					</a>
 				</div>
 				<nav class="col-lg-8 mainmenu">
@@ -25,7 +25,7 @@
 						<li class="active"><a href="index">HOME</a></li>
 						<li><a href="about">ABOUT US</a></li>
 					<!-- 	<li><a href="#">OUR SERVICES</a></li> -->
-						<li><a href="#">SELL PHONE</a></li>
+						<li><a href="sell">SELL PHONE</a></li>
 						<!-- <li><a href="#">BUY PHONE</a></li> -->
 						<li><a href="contact">CONTACT US</a></li>
 					</ul>
@@ -33,7 +33,7 @@
 			</div>
 		</div>
 	</header> <!-- /header -->
-<%= yield %>
+<ng-view></ng-view>
 <footer>
 		<div class="container">
 			<div class="row">

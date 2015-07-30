@@ -13,6 +13,7 @@ gem 'rails_12factor'
 gem 'bxslider-rails'
 
 gem 'quiet_assets', group: :development
+gem 'jquery-turbolinks'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'

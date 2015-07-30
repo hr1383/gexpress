@@ -1,13 +1,19 @@
 Rails.application.routes.draw do
+  get 'sku/:device/:carrier/:size/:state/price' => 'sku#price'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'
-
+  get 'sell' => 'application#index'
+  get 'offer' => 'application#index'
   # Example of regular route:
-    get 'about' => 'welcome#about'
-    get 'contact' => 'welcome#contact'
+    # get 'about' => 'welcome#about'
+    # get 'contact' => 'welcome#contact'
+    # get 'sell' => 'welcome#sell'
+    # get 'offer' => 'offer#index'
+    get ':device/:carrier/:size/:condition/offer' => 'application#index'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
