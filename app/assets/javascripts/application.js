@@ -19,4 +19,5 @@
 //= require angular-route
 //= require angular-resource
 //= require bootstrap-sprockets
+
 //= require_tree .

@@ -3,8 +3,8 @@ var gexpress = angular.module('gexpress', ['ngResource','ngRoute']);
 gexpress.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
   $routeProvider
-    .when("/sell", { templateUrl: "/assets/welcome/sell.html"})
-    .when("/:device/:carrier/:memory/:condition/offer", { templateUrl: "/assets/offer.html"})    
+    .when("/sell", { templateUrl: "<%= asset_path('welcome/sell.html') %>"})
+    .when("/:device/:carrier/:memory/:condition/offer", { templateUrl: "<%= asset_path('offer.html') %>"})  
     .otherwise({ redirectTo: "/" });
   }]);
 
