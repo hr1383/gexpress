@@ -945,16 +945,16 @@ footer .subscribe button[type='submit']:before {
 #purchase-content .purchase-table {
 	margin-top: 0px;
 }
-#purchase-content .purchase-table .col-lg-3 .box {
+#purchase-content .purchase-table .col-lg-12 .box {
 	text-align: center;
 	padding: 30px 37px;
 	background: #CCCCCC;
 	border-radius: 5px;
 }
-#purchase-content .purchase-table .col-lg-3.active .box {
+#purchase-content .purchase-table .col-lg-12.active .box {
 	background: #5DBC3C;
 }
-#purchase-content .purchase-table .col-lg-3 .box .amount {
+#purchase-content .purchase-table .col-lg-12 .box .amount {
 	font-size: 80px;
 	line-height: 80px;
 	color: #fff;
@@ -962,17 +962,17 @@ footer .subscribe button[type='submit']:before {
 	position: relative;
 	margin-bottom: 45px;
 }
-#purchase-content .purchase-table .col-lg-3 .box .fa {
+#purchase-content .purchase-table .col-lg-12 .box .fa {
 	font-size: 38px;
 	position: absolute;
 	top: 0;
 	left: 0px;
 }
-#purchase-content .purchase-table .col-lg-3 .box p {
+#purchase-content .purchase-table .col-lg-12 .box p {
 	margin-bottom: 40px;
 	color: #fff;
 }
-#purchase-content .purchase-table .col-lg-3 .box button {
+#purchase-content .purchase-table .col-lg-12 .box button {
 	background: #667C95;
 	height: 45px;
 	font-weight: 600;
@@ -984,10 +984,10 @@ footer .subscribe button[type='submit']:before {
 	border-radius: 5px;
 	padding: 0 24px;
 }
-#purchase-content .purchase-table .col-lg-3.active .box button {
+#purchase-content .purchase-table .col-lg-12.active .box button {
 	background: #5AAD3D;
 }
-#purchase-content .purchase-table .col-lg-3.active .box button:before {
+#purchase-content .purchase-table .col-lg-12.active .box button:before {
 	border-radius: 5px;
 	background: #667C95;
 }
