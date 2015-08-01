@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
   get 'sell' => 'application#index'
   get 'offer' => 'application#index'
+  get 'home' => 'welcome#index'
   # Example of regular route:
     # get 'about' => 'welcome#about'
     # get 'contact' => 'welcome#contact'

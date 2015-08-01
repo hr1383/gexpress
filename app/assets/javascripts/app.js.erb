@@ -4,6 +4,7 @@ gexpress.config(['$routeProvider', '$locationProvider', function($routeProvider,
   $locationProvider.html5Mode(true);
   $routeProvider
     .when("/sell", { templateUrl: "<%= asset_path('welcome/sell.html') %>"})
+    .when("/", { templateUrl: "<%= asset_path('welcome/index.html') %>"})
     .when("/:device/:carrier/:memory/:condition/offer", { templateUrl: "<%= asset_path('offer.html') %>"})  
     .otherwise({ redirectTo: "/" });
   }]);
@@ -18,6 +19,28 @@ gexpress.controller("offercontroller",['$scope', '$http', '$routeParams', functi
           console.log(sku)
           $scope.sku = sku
         });
+}]);
+
+gexpress.controller("welcomecontroller", ['$scope', function($scope) {
+$scope.initSlider = function () {
+          $(function () {
+            console.log("init slider")
+            // wait till load event fires so all resources are available
+              $scope.$slider = $('.slider').bxSlider({
+                  auto: true,
+                  controls:false,
+                  pager: false,
+                  onSlideAfter: function (currentSlideNumber, totalSlideQty, currentSlideHtmlObject) {
+                      $('.active-slide').removeClass('active-slide');
+                      $('.slider>.item').eq(currentSlideHtmlObject + 1).addClass('active-slide')
+                  },
+                  onSliderLoad: function () {
+                      $('.slider>.item').eq(1).addClass('active-slide')
+                  } 
+                });
+          });          
+      };
+  $scope.initSlider();
 }]);
 
 gexpress.controller("maincontroller", ['$scope', '$http', '$location','$window', function($scope, $http, $location, $window) {
