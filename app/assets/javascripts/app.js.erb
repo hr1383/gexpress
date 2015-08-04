@@ -1,16 +1,18 @@
-var gexpress = angular.module('gexpress', ['ngResource','ngRoute']);
+var gexpress = angular.module('gexpress', ['ngResource','ngRoute','ngCookies']);
 
 gexpress.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
   $routeProvider
     .when("/sell", { templateUrl: "<%= asset_path('welcome/sell.html') %>"})
     .when("/", { templateUrl: "<%= asset_path('welcome/index.html') %>"})
+    .when("/checkout", { templateUrl: "<%= asset_path('welcome/checkout.html') %>"})
     .when("/:device/:carrier/:memory/:condition/offer", { templateUrl: "<%= asset_path('offer.html') %>"})  
     .otherwise({ redirectTo: "/" });
   }]);
 
 
-gexpress.controller("offercontroller",['$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
+gexpress.controller("offercontroller",['$scope', '$http', '$routeParams','$cookieStore', 
+    function($scope, $http, $routeParams, $cookieStore) {
     console.log($routeParams);
       var url = "/sku/"+$routeParams['device']+'/'+$routeParams['carrier']+'/'+$routeParams['memory']
                 +'/'+$routeParams['condition']+"/price.json";
@@ -18,7 +20,33 @@ gexpress.controller("offercontroller",['$scope', '$http', '$routeParams', functi
     $http.get(url).success(function(sku) {
           console.log(sku)
           $scope.sku = sku
+          $cookieStore['sku'] = sku
         });
+    $scope.checkout = function() {
+      $location.path("/checkout");
+    } 
+}]);
+
+gexpress.controller("checkoutcntrl",['$scope', '$cookieStore', function($scope, $cookieStore) {
+   console.log("at checkout " + $cookieStore['sku']);
+   // $scope.address = nill;
+   // $scope.payment = nil;
+   $scope.checkSelected=true
+   $scope.saveAddr = function(address) {
+        $cookieStore['address'] = address;
+        
+        console.log($cookieStore['address'])
+   };
+
+   $scope.selectPayment = function(payment) {
+    console.log(payment);
+    console.log(payment == 'check');
+    if(payment == 'check') {
+      $scope.checkSelected = true;
+    } else {
+      $scope.checkSelected = false;
+    }
+   }
 }]);
 
 gexpress.controller("welcomecontroller", ['$scope', function($scope) {

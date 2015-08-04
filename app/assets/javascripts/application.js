@@ -18,6 +18,7 @@
 //= require angular
 //= require angular-route
 //= require angular-resource
+//= require angular-cookies
 //= require bootstrap-sprockets
 
 //= require_tree .
