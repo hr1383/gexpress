@@ -27,14 +27,14 @@
 								<h4>Contact Email</h4>
 								<p>All emails about your order will be sent here:</p>
 								<div class="info">
-									<p>dsfsdf@email.com <a href="#">Change</a></p>
+									<p>{{payment_check == true ? shipping_address.email : shipping_address.paypalemail}}<a href="#">Change</a></p>
 								</div>
 							</div>
 							<div class="col-lg-6">
 								<h4>Payment Details</h4>
 								<p>Will send your PayPal payment to:</p>
 								<div class="info">
-									<p>dsfsdf@email.com <a href="#">Change</a></p>
+									<p>{{billing_address.email}} <a href="#">Change</a></p>
 								</div>
 							</div>
 						</div>
@@ -44,9 +44,10 @@
 								<h4>Shipping Details</h4>
 								<p>We will send a box with a USPS label to</p>
 								<div class="info">
-									<p>hr ratio <br>
-									1254 Avenue Street <br>
-									Los Angelese, CA 90045 <br>
+									<p>{{shipping_address.fname}} {{shipping_address.lname}}<br>
+									{{shipping_address.addr1}} <br>
+									{{shipping_address.addr2}} <br>
+									{{shipping_address.city}}, {{shipping_address.state}} {{shipping_address.zipcode}}<br>
 									United States <a href="#">Change</a></p>
 								</div>
 							</div>
@@ -65,11 +66,10 @@
 									<label>How did you hear about us?</label>
 									<span class="select-box">
 										<select name="select-hear-about-us" id="select-hear-about-us">
-											<option value="select-hear-about-us">In the Internet</option>
-											<option value="select-hear-about-us">In the Internet</option>
-											<option value="select-hear-about-us">In the Internet</option>
-											<option value="select-hear-about-us">In the Internet</option>
-											<option value="select-hear-about-us">In the Internet</option>
+											<option value="select-hear-about-us">Ebay</option>
+											<option value="select-hear-about-us">Facebook</option>
+											<option value="select-hear-about-us">Twitter</option>
+											<option value="select-hear-about-us">Amazon</option>
 										</select>									
 									</span>
 								</p>

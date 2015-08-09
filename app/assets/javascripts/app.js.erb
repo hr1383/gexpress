@@ -15,7 +15,14 @@ gexpress.config(['$routeProvider', '$locationProvider', function($routeProvider,
 
 
 gexpress.controller("confirmcntrl",['$scope', '$location','$cookieStore', function($scope, $location, $cookieStore) {
-    $scope.confirm = function(shippingAddress) {
+    console.log($cookieStore['shipping_address']);
+    console.log($cookieStore['sku']);
+    console.log($cookieStore['billing_address']);
+    $scope.shipping_address = $cookieStore['shipping_address'];
+    $scope.sku = $cookieStore['sku'];
+    $scope.billing_address = $cookieStore['billing_address'];
+    $scope.payment = $cookieStore['payment_check'];
+    $scope.confirm = function() {
       $location.path("/thank-you");
     } 
 }]);
@@ -48,7 +55,7 @@ gexpress.controller("checkoutcntrl",['$scope', '$cookieStore', '$location', func
    console.log("at checkout " + $cookieStore['sku']);
    $scope.checkSelected=true
    $scope.saveAddr = function(address) {
-        $cookieStore['address'] = address;
+        $cookieStore['billing_address'] = address;
         $cookieStore['payment_check'] = $scope.checkSelected 
         $location.path("/shipping");
    };
@@ -107,8 +114,8 @@ gexpress.controller("maincontroller", ['$scope', '$http', '$location','$window',
                         ["unlocked","img/choose-carrier/unlocked.png"]
                         ];
     $scope.sizes = {
-                      "iphone6plus":["16","32","64","128"],
-                      "iphone6":["16","32","64","128"],
+                      "iphone6plus":["16","64","128"],
+                      "iphone6":["16","64","128"],
                       "iphone5":["16","32","64"],
                       "iphone5c":["16","32","64"],
                       "iphone5s":["16","32","64"],
@@ -118,7 +125,7 @@ gexpress.controller("maincontroller", ['$scope', '$http', '$location','$window',
     $scope.types=[["Flawless", "Looks like it has never been used.", "flawless"],
     ["Good", "Normal signs of use.", "good"],
     ["Broken", "The phone does not turn on or has seroius physical damage.", "broken"],
-    ["Broken but working","Doesn't turn on.", "bbw"]];
+    ["Broken but working","Doesn't turn on.", "bad"]];
     $scope.display_carrier = false;
     $scope.display_size = false;
     $scope.display_quality = false; 
@@ -127,19 +134,18 @@ gexpress.controller("maincontroller", ['$scope', '$http', '$location','$window',
     $scope.device_sizes = $scope.sizes['iphone6plus'];        
 
     $scope.setDevice = function(device, index) {
-      console.log("Set click");
       $scope.selectedDeviceIndex = index;
       $scope.selectDevice = true;
       $scope.display_carrier = true;
       $scope.device = device;
+      $scope.device_sizes = $scope.sizes[$scope.device];
       $scope.display_device = false;
     };
     
     $scope.setCarrier = function(carrier, index) {
       $scope.selectedCarrierIndex = index;
       $scope.selectCarrier = true;
-      $scope.display_size = true;
-      $scope.device_sizes = $scope.sizes[$scope.device];
+      $scope.display_size = true;    
       $scope.carrier = carrier
     };
 
