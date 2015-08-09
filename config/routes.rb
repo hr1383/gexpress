@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   get 'sell' => 'application#index'
   get 'offer' => 'application#index'
   get 'checkout' => 'application#index'
+  get 'shipping' => 'application#index'
+  get 'confirm-details' => 'application#index'
+  get 'thank-you' => 'application#index'
   get 'home' => 'welcome#index'
   # Example of regular route:
     # get 'about' => 'welcome#about'

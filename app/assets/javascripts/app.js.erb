@@ -6,10 +6,27 @@ gexpress.config(['$routeProvider', '$locationProvider', function($routeProvider,
     .when("/sell", { templateUrl: "<%= asset_path('welcome/sell.html') %>"})
     .when("/", { templateUrl: "<%= asset_path('welcome/index.html') %>"})
     .when("/checkout", { templateUrl: "<%= asset_path('welcome/checkout.html') %>"})
+    .when("/shipping", { templateUrl: "<%= asset_path('welcome/shipping-address.html') %>"})
+    .when("/confirm-details", { templateUrl: "<%= asset_path('welcome/confirm-details.html') %>"})
+    .when("/thank-you", { templateUrl: "<%= asset_path('welcome/thank-you.html') %>"})
     .when("/:device/:carrier/:memory/:condition/offer", { templateUrl: "<%= asset_path('offer.html') %>"})  
     .otherwise({ redirectTo: "/" });
   }]);
 
+
+gexpress.controller("confirmcntrl",['$scope', '$location','$cookieStore', function($scope, $location, $cookieStore) {
+    $scope.confirm = function(shippingAddress) {
+      $location.path("/thank-you");
+    } 
+}]);
+
+
+gexpress.controller("shippingcntrl",['$scope', '$location','$cookieStore', function($scope, $location, $cookieStore) {
+    $scope.saveAddr = function(shippingAddress) {
+      $cookieStore['shipping_address'] = shippingAddress;
+      $location.path("/confirm-details");
+    } 
+}]);
 
 gexpress.controller("offercontroller",['$scope', '$http', '$routeParams','$cookieStore', 
     function($scope, $http, $routeParams, $cookieStore) {
@@ -27,15 +44,13 @@ gexpress.controller("offercontroller",['$scope', '$http', '$routeParams','$cooki
     } 
 }]);
 
-gexpress.controller("checkoutcntrl",['$scope', '$cookieStore', function($scope, $cookieStore) {
+gexpress.controller("checkoutcntrl",['$scope', '$cookieStore', '$location', function($scope, $cookieStore, $location) {
    console.log("at checkout " + $cookieStore['sku']);
-   // $scope.address = nill;
-   // $scope.payment = nil;
    $scope.checkSelected=true
    $scope.saveAddr = function(address) {
         $cookieStore['address'] = address;
-        
-        console.log($cookieStore['address'])
+        $cookieStore['payment_check'] = $scope.checkSelected 
+        $location.path("/shipping");
    };
 
    $scope.selectPayment = function(payment) {
@@ -52,7 +67,6 @@ gexpress.controller("checkoutcntrl",['$scope', '$cookieStore', function($scope, 
 gexpress.controller("welcomecontroller", ['$scope', function($scope) {
 $scope.initSlider = function () {
           $(function () {
-            console.log("init slider")
             // wait till load event fires so all resources are available
               $scope.$slider = $('.slider').bxSlider({
                   auto: true,
