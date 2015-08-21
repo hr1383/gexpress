@@ -1,6 +1,7 @@
 var gexpress = angular.module('gexpress', ['ngResource','ngRoute','ngCookies']);
 
-gexpress.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+gexpress.config(['$routeProvider', '$locationProvider', '$httpProvider', 
+  function($routeProvider, $locationProvider, $httpProvider) {
   $locationProvider.html5Mode(true);
   $routeProvider
     .when("/sell", { templateUrl: "<%= asset_path('welcome/sell.html') %>"})
@@ -8,22 +9,37 @@ gexpress.config(['$routeProvider', '$locationProvider', function($routeProvider,
     .when("/checkout", { templateUrl: "<%= asset_path('welcome/checkout.html') %>"})
     .when("/shipping", { templateUrl: "<%= asset_path('welcome/shipping-address.html') %>"})
     .when("/confirm-details", { templateUrl: "<%= asset_path('welcome/confirm-details.html') %>"})
+    .when("/about-us", { templateUrl: "<%= asset_path('welcome/about-us.html') %>"})
+    .when("/contact-us", { templateUrl: "<%= asset_path('welcome/contact-us.html') %>"})
     .when("/thank-you", { templateUrl: "<%= asset_path('welcome/thank-you.html') %>"})
-    .when("/:device/:carrier/:memory/:condition/offer", { templateUrl: "<%= asset_path('offer.html') %>"})  
+    .when("/:device/:carrier/:memory/:condition/offer", { templateUrl: "<%= asset_path('welcome/offer.html') %>"})  
     .otherwise({ redirectTo: "/" });
+    $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
+ 
   }]);
 
 
-gexpress.controller("confirmcntrl",['$scope', '$location','$cookieStore', function($scope, $location, $cookieStore) {
-    console.log($cookieStore['shipping_address']);
+gexpress.controller("confirmcntrl",['$scope', '$location','$cookieStore', '$http',
+    function($scope, $location, $cookieStore, $http) {
+    console.log("shipping: "+ $cookieStore['shipping_address']);
     console.log($cookieStore['sku']);
-    console.log($cookieStore['billing_address']);
+    console.log("billing: " + $cookieStore['billing_address']);
     $scope.shipping_address = $cookieStore['shipping_address'];
     $scope.sku = $cookieStore['sku'];
     $scope.billing_address = $cookieStore['billing_address'];
     $scope.payment = $cookieStore['payment_check'];
     $scope.confirm = function() {
-      $location.path("/thank-you");
+      $http.post('/orders.json', {'shipping_address': $scope.shipping_address, 'sku':$scope.sku, 
+        'billing' : $scope.billing_address, 'payment_method': $scope.payment}).
+        then(function(response) {
+          $location.path("/thank-you");
+          // this callback will be called asynchronously
+          // when the response is available
+        }, function(response) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+        });
+      
     } 
 }]);
 
@@ -99,10 +115,10 @@ gexpress.controller("maincontroller", ['$scope', '$http', '$location','$window',
     $scope.devices = [
                        ["Iphone 6 Plus","img/choose-phone/1.png","iphone6plus"], 
                        ["Iphone 6", "img/choose-phone/2.png", "iphone6"],
-                       ["Iphone 5S", "img/choose-phone/3.png","iphone5S"],
+                       ["Iphone 5S", "img/choose-phone/3.png","iphone5s"],
                        ["Iphone 5","img/choose-phone/4.png","iphone5"],
-                       ["Iphone 5C","img/choose-phone/5.png","iphone5C"],
-                       ["Iphone 4S", "img/choose-phone/6.png","iphone4S"],
+                       ["Iphone 5C","img/choose-phone/5.png","iphone5c"],
+                       ["Iphone 4S", "img/choose-phone/6.png","iphone4s"],
                        ["Iphone 4", "img/choose-phone/7.png","iphone4"]
                        ];
 
@@ -138,6 +154,8 @@ gexpress.controller("maincontroller", ['$scope', '$http', '$location','$window',
       $scope.selectDevice = true;
       $scope.display_carrier = true;
       $scope.device = device;
+      console.log($scope.device)
+      console.log($scope.sizes)
       $scope.device_sizes = $scope.sizes[$scope.device];
       $scope.display_device = false;
     };

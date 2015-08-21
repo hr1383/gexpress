@@ -26,49 +26,76 @@
 								<p>
 									<label>Payable to:</label>
 									<input type="text" placeholder="Enter First Name" ng-model="shippingAddress.fname" required="">
+									<div ng-show="shippingAddress.$submitted || shippingAddress.fname.$touched">
+										<span ng-show="shippingAddress.fname.$error.required">Enter the First name.</span>
+									</div>
 								</p>
 							</div>
 							<div class="col-lg-6">	
 								<p>
 									<label>&nbsp;</label>
 									<input type="text" placeholder="Enter Last Name" ng-model="shippingAddress.lname" required="">
+									<div ng-show="shippingAddress.$submitted || shippingAddress.lname.$touched">
+										<span ng-show="shippingAddress.lname.$error.required">Enter the Last name.</span>
+									</div>	
 								</p>
 							</div>
 							<div class="col-lg-6">
 								<p>
 									<label>Address Line 1:</label>
-									<input type="text" placeholder="Enter Your Address" ng-model="shippingAddress.addr1" required="">
+									<input type="text" placeholder="Enter Your Address" ng-model="shippingAddress.addr" required="">
+									<div ng-show="shippingAddress.$submitted || shippingAddress.addr.$touched">
+										<span ng-show="shippingAddress.addr.$error.required">Enter the Address.</span>
+									</div>
 								</p>
 							</div>
 							<div class="col-lg-6">									
 								<p>
 									<label>Address Line 2 (Optional):</label>
-									<input type="text" ng-model="shippingAddress.adrr2">
+									<input type="text" ng-model="shippingAddress.addr1">
 								</p>
 							</div>
 							<div class="col-lg-5">
 								<p>
 									<label>City:</label>
 									<input type="text" placeholder="City" ng-model="shippingAddress.city" required="">
+									<div ng-show="shippingAddress.$submitted || shippingAddress.city.$touched">
+										<span ng-show="shippingAddress.city.$error.required">Enter the City.</span>
+									</div>	
 								</p>
 							</div>
 							<div class="col-lg-5">
 								<p>
 									<label>State:</label>
 									<input type="text" name="state" placeholder="State" ng-model="shippingAddress.state" required="">
-									<span ng-show="shipping.state.$error.required">Enter the State.</span>		
+									<div ng-show="shippingAddress.$submitted || shippingAddress.state.$touched">
+										<span ng-show="shippingAddress.state.$error.required">Enter the State.</span>		
+									</div>
 								</p>
 							</div>
 							<div class="col-lg-2">
 								<p>
 									<label>Zip:</label>
 									<input type="text" placeholder="Enter Zip" ng-model="shippingAddress.zip" required="">
+									<div ng-show="shippingAddress.$submitted || shippingAddress.zip.$touched">
+										<span ng-show="shippingAddress.state.$error.required">Enter the Zipcode.</span>	
+									</div>		
 								</p>
 							</div>
 							<div class="col-lg-6">
 								<p>
+									<label>Email:</label>
+									<input type="text" placeholder="Enter Email" ng-model="shippingAddress.email" required="">
+									<div ng-show="shippingAddress.$submitted || shippingAddress.email.$touched">
+										<span ng-show="shippingAddress.state.$error.required">Enter the Email.</span>
+									</div>	
+								</p>
+								
+							</div>
+							<div class="col-lg-6">
+								<p>
 									<label>Phone (Optional):</label>
-									<input type="text" placeholder="Enter Phone" ng-model="shippingAddress.phone" required="">
+									<input type="text" placeholder="Enter Phone" ng-model="shippingAddress.phone">
 								</p>
 								
 							</div>							

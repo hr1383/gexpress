@@ -27,7 +27,7 @@
 								<h4>Contact Email</h4>
 								<p>All emails about your order will be sent here:</p>
 								<div class="info">
-									<p>{{payment_check == true ? shipping_address.email : shipping_address.paypalemail}}<a href="#">Change</a></p>
+									<p>{{payment_check == true ? billing_address.email : billing_address.paypalemail}}<a href="#">Change</a></p>
 								</div>
 							</div>
 							<div class="col-lg-6">
@@ -45,8 +45,8 @@
 								<p>We will send a box with a USPS label to</p>
 								<div class="info">
 									<p>{{shipping_address.fname}} {{shipping_address.lname}}<br>
+									{{shipping_address.addr}} <br>
 									{{shipping_address.addr1}} <br>
-									{{shipping_address.addr2}} <br>
 									{{shipping_address.city}}, {{shipping_address.state}} {{shipping_address.zipcode}}<br>
 									United States <a href="#">Change</a></p>
 								</div>
@@ -70,7 +70,7 @@
 											<option value="select-hear-about-us">Facebook</option>
 											<option value="select-hear-about-us">Twitter</option>
 											<option value="select-hear-about-us">Amazon</option>
-										</select>									
+ 										</select>									
 									</span>
 								</p>
 							</div>

@@ -21,6 +21,8 @@ class Order
   field :billing_city
   field :billing_state
   field :billing_zipcode
+  field :billing_phone
+  field :billing_email
   field :paypal_email
   field :order_status
   field :created_at, :type => Date

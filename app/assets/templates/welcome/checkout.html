@@ -28,114 +28,113 @@
 							</div>
 					</div>				
 					<form name="shipping">
-						<div ng-show="checkSelected">
-							<div class="row form-box">
-								<div class="col-lg-12">
-									<h3>Please provide the address you'd like your check send to</h3>
-								</div>
-								<div class="col-lg-6">
-									<p>
-										<label>Payable to:</label>
-										<input type="text" placeholder="Enter First Name" ng-model="address.fname" name="fname" required="">
-									    <div ng-show="shipping.$submitted || shipping.fname.$touched">
-											<span ng-show="shipping.fname.$error.required">Enter First Name.</span>
-										</div>
-									</p>
-								</div>	
-								<div class="col-lg-6">
-									<p>
-										<label>&nbsp;</label>
-										<input type="text" placeholder="Enter Last Name" ng-model="address.lname" required="" name="lname">
-										<div ng-show="shipping.$submitted || shipping.fname.$touched">
-											<span ng-show="shipping.lname.$error.required">Enter Last Name.</span>
-										</div>
-									</p>
-								</div>
-								<div class="col-lg-6">	
-									<p>
-										<label>Address Line 1:</label>
-										<input type="text" name="addr1" placeholder="Enter Your Address" ng-model="address.mainaddress" required="">
-										<div ng-show="shipping.$submitted || shipping.addr1.$touched">
-											<span ng-show="shipping.addr1.$error.required">Enter Address.</span>
-										</div>
-									</p>
-								</div>
-								<div class="col-lg-6">	
-									<p>
-										<label>Address Line 2 (Optional):</label>
-										<input type="text" ng-model="address.address1">
-										<span ng-show="false">Enter Address.</span>
-									</p>
-								</div>
-								<div class="col-lg-4">
-									<p>
-										<label>City:</label>
-										<input type="text" name="city" placeholder="City" ng-model="address.city" required="">
-										<div ng-show="shipping.$submitted || shipping.city.$touched">
-											<span ng-show="shipping.city.$error.required">Enter City.</span>
-										</div>
-									</p>
-								</div>
-								<div class="col-lg-4">
-									<p>
-										<label>State:</label>									
-										<input type="text" name="state" placeholder="State" ng-model="address.state" required="">
-										<div ng-show="shipping.$submitted || shipping.state.$touched">
-											<span ng-show="shipping.state.$error.required">Enter the State.</span>
-										</div>
-									</p>
-								</div>
-								<div class="col-lg-4">
-									<p>
-										<label>Zip:</label>
-										<input type="text" name="zip" placeholder="Enter Zip" ng-model="address.zip" required="">
-										<div ng-show="shipping.$submitted || shipping.zip.$touched">
-											<span ng-show="shipping.zip.$error.required">Enter Zipcode.</span>
-										</div>			
-									</p>
-								</div>
-								<div class="col-lg-6">
-									<p>
-										<label>Email:</label>
-										<input type="text" placeholder="Enter Email" ng-model="address.email" required="">
-										<div ng-show="shipping.$submitted || shipping.email.$touched">						<span ng-show="shipping.zip.$error.required">Enter Email.</span>	
-										</div>
-									</p>
-								</div>
-								<div class="col-lg-6">
-									<p>
-										<label>Phone (Optional):</label>
-										<input type="text" placeholder="Enter Phone" ng-model="address.phone">
-									</p>
-								</div>
-							</div>							
-						</div>
-						<div ng-hide="checkSelected">
-							<div class="row form-box">
-								<div class="col-lg-12">
-									<h3>Enter your email address associated with your PayPal account</h3>
-								</div>
-								<div class="col-lg-6">
-									<p>
-										<label>Email address:</label>
-										<input type="text" placeholder="Enter Email Address" ng-model="address.paypalemail">
-									</p>
-								</div>
-								<div class="col-lg-6">							
-									<p>
-										<label>Confirm Email Address:</label>
-										<input type="text" placeholder="Confirm Email Address">
-									</p>
-								</div>
+						<div class="row form-box" ng-show="checkSelected">
+							<div class="col-lg-12">
+								<h3>Please provide the address you'd like your check send to</h3>
 							</div>
-						</div> <!-- div of paypal -->
-						<div class="row form-box col-lg-6 pull-right">
-							<p>
-								<button class="hvr-bounce-to-right" ng-click="saveAddr(address)">Continue <i class="fa fa-angle-right"></i></input>
-							</p>
+							<div class="col-lg-6">
+								<p>
+									<label>Payable to:</label>
+									<input type="text" placeholder="Enter First Name" ng-model="address.fname" name="fname" required="">
+								    <div ng-show="shipping.$submitted || shipping.fname.$touched">
+										<span ng-show="shipping.fname.$error.required">Enter First Name.</span>
+									</div>
+								</p>
+							</div>	
+							<div class="col-lg-6">
+								<p>
+									<label>&nbsp;</label>
+									<input type="text" placeholder="Enter Last Name" ng-model="address.lname" required="" name="lname">
+									<div ng-show="shipping.$submitted || shipping.fname.$touched">
+										<span ng-show="shipping.lname.$error.required">Enter Last Name.</span>
+									</div>
+								</p>
+							</div>
+							<div class="col-lg-6">	
+								<p>
+									<label>Address Line 1:</label>
+									<input type="text" name="addr1" placeholder="Enter Your Address" ng-model="address.addr" required="">
+									<div ng-show="shipping.$submitted || shipping.addr.$touched">
+										<span ng-show="shipping.addr1.$error.required">Enter Address.</span>
+									</div>
+								</p>
+							</div>
+							<div class="col-lg-6">	
+								<p>
+									<label>Address Line 2 (Optional):</label>
+									<input type="text" ng-model="address.addr1">
+									<span ng-show="false">Enter Address.</span>
+								</p>
+							</div>
+							<div class="col-lg-4">
+								<p>
+									<label>City:</label>
+									<input type="text" name="city" placeholder="City" ng-model="address.city" required="">
+									<div ng-show="shipping.$submitted || shipping.city.$touched">
+										<span ng-show="shipping.city.$error.required">Enter City.</span>
+									</div>
+								</p>
+							</div>
+							<div class="col-lg-4">
+								<p>
+									<label>State:</label>									
+									<input type="text" name="state" placeholder="State" ng-model="address.state" required="">
+									<div ng-show="shipping.$submitted || shipping.state.$touched">
+										<span ng-show="shipping.state.$error.required">Enter the State.</span>
+									</div>
+								</p>
+							</div>
+							<div class="col-lg-4">
+								<p>
+									<label>Zip:</label>
+									<input type="text" name="zip" placeholder="Enter Zip" ng-model="address.zip" required="">
+									<div ng-show="shipping.$submitted || shipping.zip.$touched">
+										<span ng-show="shipping.zip.$error.required">Enter Zipcode.</span>
+									</div>			
+								</p>
+							</div>
+							<div class="col-lg-6">
+								<p>
+									<label>Email:</label>
+									<input type="text" placeholder="Enter Email" ng-model="address.email" required="">
+									<div ng-show="shipping.$submitted || shipping.email.$touched">						<span ng-show="shipping.zip.$error.required">Enter Email.</span>	
+									</div>
+								</p>
+							</div>
+							<div class="col-lg-6">
+								<p>
+									<label>Phone (Optional):</label>
+									<input type="text" placeholder="Enter Phone" ng-model="address.phone">
+								</p>
+							</div>							
+							<div class="col-lg-6 pull-right">
+								<p>
+									<button type="submit" class="hvr-bounce-to-right" ng-click="saveAddr(address)">Continue <i class="fa fa-angle-right"></i></button>
+								</p>
+							</div>						
 						</div>
-						</div>
-						
+						<div class="row form-box" ng-hide="checkSelected">
+							<div class="col-lg-12">
+								<h3>Enter your email address associated with your PayPal account</h3>
+							</div>
+							<div class="col-lg-6">
+								<p>
+									<label>Email address:</label>
+									<input type="text" placeholder="Enter Email Address" ng-model="address.paypalemail">
+								</p>
+							</div>
+							<div class="col-lg-6">							
+								<p>
+									<label>Confirm Email Address:</label>
+									<input type="text" placeholder="Confirm Email Address">
+								</p>
+							</div>
+							<div class="col-lg-6 pull-right">
+								<p>
+									<button type="submit" class="hvr-bounce-to-right" ng-click="saveAddr(address)">Continue <i class="fa fa-angle-right"></i></button>
+								</p>
+							</div>	
+						</div> <!-- paypal -->
 					</form>
 				</div>
 			</div>
