@@ -10,8 +10,9 @@ gem 'angularjs-rails', '~> 1.2.25'
 gem 'bootstrap-sass', '~> 3.2.0.2'
 gem "font-awesome-rails"
 gem 'rails_12factor'
-gem 'bxslider-rails'
-
+# gem 'bxslider-rails'
+gem 'mandrill_mailer'
+gem 'mandrill-api'
 gem 'quiet_assets', group: :development
 gem 'jquery-turbolinks'
 

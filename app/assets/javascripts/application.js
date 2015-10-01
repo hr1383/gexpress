@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require jquery.turbolinks
 //= require turbolinks
-//= require bxslider
 //= require angular
 //= require angular-route
 //= require angular-resource

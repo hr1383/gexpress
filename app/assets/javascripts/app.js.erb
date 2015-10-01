@@ -4,7 +4,8 @@ gexpress.config(['$routeProvider', '$locationProvider', '$httpProvider',
   function($routeProvider, $locationProvider, $httpProvider) {
   $locationProvider.html5Mode(true);
   $routeProvider
-    .when("/sell", { templateUrl: "<%= asset_path('welcome/sell.html') %>"})
+    .when("/sell-iphone", { templateUrl: "<%= asset_path('welcome/sell-iphone.html') %>"})
+    .when("/sell-ipad", { templateUrl: "<%= asset_path('welcome/sell-ipad.html') %>"})
     .when("/", { templateUrl: "<%= asset_path('welcome/index.html') %>"})
     .when("/checkout", { templateUrl: "<%= asset_path('welcome/checkout.html') %>"})
     .when("/shipping", { templateUrl: "<%= asset_path('welcome/shipping-address.html') %>"})
@@ -18,12 +19,13 @@ gexpress.config(['$routeProvider', '$locationProvider', '$httpProvider',
  
   }]);
 
+gexpress.controller("thankyoucntrl",['$scope', '$location','$cookieStore', function($scope, $location, $cookieStore) {
+    $scope.email = $cookieStore['email']
+    $scope.order_id = $cookieStore['order_id']
+}]);
 
 gexpress.controller("confirmcntrl",['$scope', '$location','$cookieStore', '$http',
     function($scope, $location, $cookieStore, $http) {
-    console.log("shipping: "+ $cookieStore['shipping_address']);
-    console.log($cookieStore['sku']);
-    console.log("billing: " + $cookieStore['billing_address']);
     $scope.shipping_address = $cookieStore['shipping_address'];
     $scope.sku = $cookieStore['sku'];
     $scope.billing_address = $cookieStore['billing_address'];
@@ -31,10 +33,10 @@ gexpress.controller("confirmcntrl",['$scope', '$location','$cookieStore', '$http
     $scope.confirm = function() {
       $http.post('/orders.json', {'shipping_address': $scope.shipping_address, 'sku':$scope.sku, 
         'billing' : $scope.billing_address, 'payment_method': $scope.payment}).
-        then(function(response) {
+        then(function(response) { 
+          $cookieStore['email'] = response['data']['billing_email'];
+          $cookieStore['order_id'] = response['data']['order_id'];
           $location.path("/thank-you");
-          // this callback will be called asynchronously
-          // when the response is available
         }, function(response) {
           // called asynchronously if an error occurs
           // or server returns response with an error status.
@@ -67,21 +69,31 @@ gexpress.controller("offercontroller",['$scope', '$http', '$routeParams','$cooki
     } 
 }]);
 
-gexpress.controller("checkoutcntrl",['$scope', '$cookieStore', '$location', function($scope, $cookieStore, $location) {
+gexpress.controller("checkoutcntrl",['$scope', '$cookieStore', '$location', '$http', 
+  function($scope, $cookieStore, $location, $http) {
    console.log("at checkout " + $cookieStore['sku']);
    $scope.checkSelected=true
+   $scope.payment_method='check';
    $scope.saveAddr = function(address) {
-        $cookieStore['billing_address'] = address;
-        $cookieStore['payment_check'] = $scope.checkSelected 
-        $location.path("/shipping");
+        sku = $cookieStore['sku'];
+        $http.post('/orders.json', {'sku':sku, 'billing' : address, 
+          'payment_method': $scope.payment_method}).
+        then(function(response) { 
+          $cookieStore['email'] = response['data']['billing_email'];
+          $cookieStore['order_id'] = response['data']['order_id'];
+          $location.path("/thank-you");
+        }, function(response) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+        });
    };
 
    $scope.selectPayment = function(payment) {
-    console.log(payment);
-    console.log(payment == 'check');
     if(payment == 'check') {
+      $scope.payment_method = 'check';
       $scope.checkSelected = true;
     } else {
+      $scope.payment_method = 'paypal';
       $scope.checkSelected = false;
     }
    }
@@ -108,10 +120,9 @@ $scope.initSlider = function () {
   $scope.initSlider();
 }]);
 
-gexpress.controller("maincontroller", ['$scope', '$http', '$location','$window', function($scope, $http, $location, $window) {
+gexpress.controller("iphonecontroller", ['$scope', '$http', '$location','$window', function($scope, $http, $location, $window) {
   $scope.skus = [];
   $scope.selectedIndex = -1;
-  console.log("hello inside")
     $scope.devices = [
                        ["Iphone 6 Plus","img/choose-phone/1.png","iphone6plus"], 
                        ["Iphone 6", "img/choose-phone/2.png", "iphone6"],
@@ -137,6 +148,79 @@ gexpress.controller("maincontroller", ['$scope', '$http', '$location','$window',
                       "iphone5s":["16","32","64"],
                       "iphone4":["8","16","64"],
                       "iphone4s":["8","16","32","64"]
+                    };
+    $scope.types=[["Flawless", "Looks like it has never been used.", "flawless"],
+    ["Good", "Normal signs of use.", "good"],
+    ["Broken", "The phone does not turn on or has seroius physical damage.", "broken"],
+    ["Broken but working","Doesn't turn on.", "bad"]];
+    $scope.display_carrier = false;
+    $scope.display_size = false;
+    $scope.display_quality = false; 
+    $scope.display_device = true;
+    $scope.display_paid = false;
+    $scope.device_sizes = $scope.sizes['iphone6plus'];        
+
+    $scope.setDevice = function(device, index) {
+      $scope.selectedDeviceIndex = index;
+      $scope.selectDevice = true;
+      $scope.display_carrier = true;
+      $scope.device = device;
+      console.log($scope.device)
+      console.log($scope.sizes)
+      $scope.device_sizes = $scope.sizes[$scope.device];
+      $scope.display_device = false;
+    };
+    
+    $scope.setCarrier = function(carrier, index) {
+      $scope.selectedCarrierIndex = index;
+      $scope.selectCarrier = true;
+      $scope.display_size = true;    
+      $scope.carrier = carrier
+    };
+
+    $scope.setSize = function(size, index) {
+      $scope.selectedMemoryIndex = index;
+      $scope.selectMemory = true;
+      $scope.memory = size;
+      $scope.display_quality = true; 
+    }
+
+     $scope.setCondition = function(condition, index) {
+      $scope.selectedConditionIndex = index;
+      $scope.selectCondition = true;
+      $scope.condition = condition;
+      $scope.display_offer = true;
+    }
+
+    $scope.offer = function() {
+      var route = "/"+$scope.device+"/"+$scope.carrier+"/"+$scope.memory+"/"+$scope.condition+"/offer";
+      $location.path(route);
+    }                     
+}]);
+
+
+gexpress.controller("ipadcontroller", ['$scope', '$http', '$location','$window', function($scope, $http, $location, $window) {
+  $scope.skus = [];
+  $scope.selectedIndex = -1;
+    $scope.devices = [
+                       ["Ipad Air 1", "img/ipad/ipad_air.png", "ipadair1"],
+                       ["Ipad Air 2", "img/ipad/ipad_air.png", "ipadair2"],
+                       ["Ipad Mini 2", "img/ipad/ipad_mini.png","ipadmini2"],
+                       ["Ipad Mini 3", "img/ipad/ipad_mini.png","ipadmini3"]
+                       ];
+
+  $scope.carriers = [
+                        ["att","img/choose-carrier/att.png"],
+                        ["verizon","img/choose-carrier/verizon.png"],
+                        ["sprint","img/choose-carrier/sprint.png"],
+                        ["tmobile","img/choose-carrier/tmobile.png"],
+                        ["unlocked","img/choose-carrier/unlocked.png"]
+                        ];
+    $scope.sizes = {
+                      "ipad_mini_2":["16","32","64","128"],
+                      "ipad_mini_3":["16","64","128"],
+                      "ipad_air_1":["16","32","64","128"],
+                      "ipad_air_2":["16","64","128"]
                     };
     $scope.types=[["Flawless", "Looks like it has never been used.", "flawless"],
     ["Good", "Normal signs of use.", "good"],

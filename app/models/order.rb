@@ -28,12 +28,12 @@ class Order
   field :created_at, :type => Date
   field :shipped_on, :type => Date
   field :received_on, :type => Date
-
+  
   after_initialize :add_orderid
-  def add_orderid
-  	puts "hell"
-  	self.order_id = loop do
-  		token = SecureRandom.urlsafe_base64
+  def add_orderid    
+  	self.order_id = loop do      
+      range = [*'0'..'9',*'A'..'Z',*'a'..'z']
+      token = Array.new(10){range.sample }.join
   		break token unless Order.where(order_id: token).count != 0
 	end
   end

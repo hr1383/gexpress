@@ -593,7 +593,7 @@ footer .subscribe button[type='submit']:before {
 **/
 
 #purchase-content {
-	padding: 50px 0;
+	padding: 100px 0;
 	border-top: 1px solid #D6D6D6;
 }
 #purchase-content .purchase-title h2 {
@@ -1017,7 +1017,7 @@ footer .subscribe button[type='submit']:before {
 	color: #292929;
 	margin-bottom: 10px;
 }
-#purchase-content .form-box p input[type="text"] {
+#purchase-content .form-box input[type="text"] {
 	width: 100%;
 	height: 45px;
 	padding: 0 10px;

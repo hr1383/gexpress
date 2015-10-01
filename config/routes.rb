@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'welcome#index'
   get 'sell' => 'application#index'
+  get 'sell-ipad' => 'application#index'
   get 'offer' => 'application#index'
   get 'about-us' => 'application#index'
   get 'contact-us' => 'application#index'

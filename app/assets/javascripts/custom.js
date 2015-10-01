@@ -1,12 +1,12 @@
 (function ($) {
 	'use strict';
 	function stickyHeader () {
-		if($(window).scrollTop() > 10) {
-			$('header').addClass('header-fixed'); 
-		}
-		else if($(this).scrollTop() <= 10) {
-			$('header').removeClass('header-fixed'); 
-		}
+		// if($(window).scrollTop() > 10) {
+		// 	$('header').addClass('header-fixed'); 
+		// }
+		// else if($(this).scrollTop() <= 10) {
+		// 	$('header').removeClass('header-fixed'); 
+		// }
 	}
 	function menuHover () {
 		if ($('header nav.mainmenu ul li').length) {
