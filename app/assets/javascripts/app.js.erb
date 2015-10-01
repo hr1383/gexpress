@@ -76,7 +76,7 @@ gexpress.controller("checkoutcntrl",['$scope', '$cookieStore', '$location', '$ht
    $scope.payment_method='check';
    $scope.saveAddr = function(address) {
         sku = $cookieStore['sku'];
-        $http.post('/orders.json', {'sku':sku, 'billing' : address, 
+        $http.post('/orders.json', {'sku': sku, 'billing' : address, 
           'payment_method': $scope.payment_method}).
         then(function(response) { 
           $cookieStore['email'] = response['data']['billing_email'];
