@@ -2,18 +2,15 @@
 <section id="purchase-content">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-8 purchase-title pull-left">				
-					<h2 class="pull-left">wohoo !! Your orderId for further inquiry is {{order_id}} and will send an email on {{email}} with details</h2> 
-					<p>
+				<div class="col-lg-12 purchase-title-center">
+					<h2>Your orderId for further inquiry is {{order_id}} and we will send an email on {{email}} with details.</h2> 
 				</div>
-				<div class="col-lg-4 purchase-help pull-right">
-					<p class="social-share-wrap">
-						<div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
-					
-						<a href="https://twitter.com/share" class="twitter-share-button" data-via="ashikur1993">Tweet</a>
-					</p>
-					<p>Do you have any questions? <a href="#">Help Center</a></p>
-				</div>
+				<div class="col-lg-12 purchase-title-center pull-left">
+					<h2>To ship the device faster, click below to print the shipping label.</h2>
+				</div>	
+				<div class="col-lg-12 purchase-title-shipping">
+					<button ng-click="print()">Print Shipping Label<i class="fa fa-angle-right"></i></button>
+				</div>	
 			</div>									
 		</div>
 	</section>

@@ -13,15 +13,32 @@ gexpress.config(['$routeProvider', '$locationProvider', '$httpProvider',
     .when("/about-us", { templateUrl: "<%= asset_path('welcome/about-us.html') %>"})
     .when("/contact-us", { templateUrl: "<%= asset_path('welcome/contact-us.html') %>"})
     .when("/thank-you", { templateUrl: "<%= asset_path('welcome/thank-you.html') %>"})
+    .when("/shipping-label", { templateUrl: "<%= asset_path('welcome/shipping-label.html') %>"})
     .when("/:device/:carrier/:memory/:condition/offer", { templateUrl: "<%= asset_path('welcome/offer.html') %>"})  
     .otherwise({ redirectTo: "/" });
     $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
  
   }]);
 
-gexpress.controller("thankyoucntrl",['$scope', '$location','$cookieStore', function($scope, $location, $cookieStore) {
+gexpress.controller("thankyoucntrl", ['$scope','$cookieStore', '$location', function($scope, $cookieStore, $location) {
     $scope.email = $cookieStore['email']
     $scope.order_id = $cookieStore['order_id']
+    $scope.print = function() {
+      $location.path("/shipping-label");
+    }
+}]);
+
+gexpress.controller("shippinglabelcntrl", ['$scope','$cookieStore', '$sce', function($scope, $cookieStore, $sce) {
+    $scope.email = $cookieStore['email']
+    $scope.order_id = $cookieStore['order_id']
+    var embedExternal = true;
+    var embedExternalUrl = encodeURIComponent(document.location.href);
+
+    var rrHost = 'https://cellurlcd.readyreturns.com//';
+    if (embedExternal) {
+        rrHost += '?embed=1&embed_url=' + embedExternalUrl;
+    }
+    $scope.detailFrame= $sce.trustAsResourceUrl(rrHost);
 }]);
 
 gexpress.controller("confirmcntrl",['$scope', '$location','$cookieStore', '$http',

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'offer' => 'application#index'
   get 'about-us' => 'application#index'
   get 'contact-us' => 'application#index'
+  get 'shipping-label' => 'application#index'
   get 'checkout' => 'application#index'
   get 'shipping' => 'application#index'
   get 'confirm-details' => 'application#index'

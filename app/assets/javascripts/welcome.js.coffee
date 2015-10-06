@@ -1,10 +1,6 @@
 (($) ->
 
-  stickyHeader = ->
-    if $(window).scrollTop() > 10
-      $('header').addClass 'header-fixed'
-    else if $(this).scrollTop() <= 10
-      $('header').removeClass 'header-fixed'
+  stickyHeader = ->    
     return
 
   menuHover = ->

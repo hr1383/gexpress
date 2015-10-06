@@ -596,6 +596,7 @@ footer .subscribe button[type='submit']:before {
 	padding: 100px 0;
 	border-top: 1px solid #D6D6D6;
 }
+
 #purchase-content .purchase-title h2 {
 	font-size: 20px;
 	line-height: 42px;
@@ -603,6 +604,16 @@ footer .subscribe button[type='submit']:before {
 	color: #292929;
 	font-weight: 600;
 }
+
+#purchase-content .purchase-title-center h2 {
+	font-size: 20px;
+	line-height: 42px;
+	margin-bottom: 0;
+	color: #292929;
+	font-weight: 600;
+	text-align: center;
+}
+
 #purchase-content .purchase-help {
 	text-align: right;
 }
@@ -791,6 +802,22 @@ footer .subscribe button[type='submit']:before {
 	font-size: 12px;
 	padding: 0 25px;
 }
+
+#purchase-content .purchase-title-shipping button {
+	color: #FFF;
+    background: #3C84BC;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    line-height: 50px;
+    font-size: 15px;
+    padding: 0 25px; 
+    width: 400px;
+    display: block;
+    margin: 0 auto;
+}
+
+
 #purchase-content .purchase-title button:before {
 	border-radius: 3px;
 	background: #5DBC3C;
