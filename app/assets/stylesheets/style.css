@@ -1045,7 +1045,7 @@ footer .subscribe button[type='submit']:before {
 	margin-bottom: 10px;
 }
 #purchase-content .form-box input[type="text"] {
-	width: 100%;
+	width: 40%;
 	height: 45px;
 	padding: 0 10px;
 	border: 1px solid #ccc;

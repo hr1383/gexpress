@@ -90,19 +90,23 @@ gexpress.controller("checkoutcntrl",['$scope', '$cookieStore', '$location', '$ht
   function($scope, $cookieStore, $location, $http) {
    console.log("at checkout " + $cookieStore['sku']);
    $scope.checkSelected=true
-   $scope.payment_method='check';
+   $scope.payment_method='check'
    $scope.saveAddr = function(address) {
-        sku = $cookieStore['sku'];
-        $http.post('/orders.json', {'sku': sku, 'billing' : address, 
-          'payment_method': $scope.payment_method}).
-        then(function(response) { 
-          $cookieStore['email'] = response['data']['billing_email'];
-          $cookieStore['order_id'] = response['data']['order_id'];
-          $location.path("/thank-you");
-        }, function(response) {
-          // called asynchronously if an error occurs
-          // or server returns response with an error status.
-        });
+        if ($scope.payment.$valid) {
+          sku = $cookieStore['sku']
+          $http.post('/orders.json', {'sku': sku, 'billing' : address, 
+            'payment_method': $scope.payment_method}).
+          then(function(response) { 
+            $cookieStore['email'] = response['data']['billing_email']
+            $cookieStore['order_id'] = response['data']['order_id']
+            $location.path("/thank-you")
+          }, function(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+          });
+        } else {
+          $scope.payment.submitted = true
+        }
    };
 
    $scope.selectPayment = function(payment) {

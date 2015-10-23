@@ -29,7 +29,9 @@ class OrderController < ApplicationController
 						  :paypal_email => billing['paypalemail'],
 						  :order_status => 'NEW')
 		order.save
-		Emailer.new_order.deliver
+		if Rails.env.production?
+			Emailer.new_order.deliver
+		end
 		respond_to do |format|    	
     		format.json  { render :json => order.to_json }
 		end

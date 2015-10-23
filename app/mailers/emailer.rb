@@ -1,10 +1,7 @@
 class Emailer < MandrillMailer::TemplateMailer
 	default from: ENV['FROM_MAIL']
 
-	def new_order(email)
-    # in this example `invitation.invitees` is an Array
-   
-
+	def new_order
     mandrill_mail template: 'gexpress-new',
                   subject: 'Thanks for signing up',
                   to: ENV['TO_MAIL'],
@@ -14,5 +11,9 @@ class Emailer < MandrillMailer::TemplateMailer
                   important: true,
                   inline_css: true                  
                   
+  end
+  unless Rails.env.production?
+    ENV['FROM_MAIL'] = 'test@test.com'
+    ENV['TO_MAIL'] = 'test@test.com'
   end
 end
