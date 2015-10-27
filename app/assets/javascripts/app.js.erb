@@ -1,4 +1,4 @@
-var gexpress = angular.module('gexpress', ['ngResource','ngRoute','ngCookies']);
+var gexpress = angular.module('gexpress', ['ngResource','ngRoute','ngCookies', 'uiGmapgoogle-maps', 'nemLogging']);
 
 gexpress.config(['$routeProvider', '$locationProvider', '$httpProvider', 
   function($routeProvider, $locationProvider, $httpProvider) {
@@ -26,6 +26,27 @@ gexpress.controller("thankyoucntrl", ['$scope','$cookieStore', '$location', func
     $scope.print = function() {
       $location.path("/shipping-label");
     }
+}]);
+
+gexpress.controller("contactuscntrl", ['$scope','$cookieStore', '$location', function($scope, $cookieStore, $location) {
+    // $scope.loadmap = function() {
+      
+    //  var map;
+    //         map = new GMaps({
+    //             div: '#gmap',
+    //             control: false,
+    //             lat: -37.812802,
+    //             lng: 144.956981
+    //         });
+    //         map.addMarker({
+    //             icon: 'img/map-marker.png',
+    //             lat: -37.812802,
+    //             lng: 144.956981,
+    //             title: 'Envato HeadQuarter'
+    //         });
+    // }
+    // $scope.loadmap()
+    $scope.map = { center: { latitude:  -37.812802, longitude: 144.956981 }, zoom: 8 };
 }]);
 
 gexpress.controller("shippinglabelcntrl", ['$scope','$cookieStore', '$sce', function($scope, $cookieStore, $sce) {
@@ -120,12 +141,12 @@ gexpress.controller("checkoutcntrl",['$scope', '$cookieStore', '$location', '$ht
    }
 }]);
 
-gexpress.controller("welcomecontroller", ['$scope', function($scope) {
+gexpress.controller("welcomecontroller", ['$scope', '$location', function($scope, $location) {
 $scope.initSlider = function () {
           $(function () {
             // wait till load event fires so all resources are available
               $scope.$slider = $('.slider').bxSlider({
-                  auto: true,
+                  // auto: true,
                   controls:false,
                   pager: false,
                   onSlideAfter: function (currentSlideNumber, totalSlideQty, currentSlideHtmlObject) {
@@ -139,6 +160,10 @@ $scope.initSlider = function () {
           });          
       };
   $scope.initSlider();
+  $scope.gotoDiv = function() {
+    console.log("Hello")
+    $location.hash("select-device")
+  }
 }]);
 
 gexpress.controller("iphonecontroller", ['$scope', '$http', '$location','$window', function($scope, $http, $location, $window) {

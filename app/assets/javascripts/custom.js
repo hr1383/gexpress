@@ -232,7 +232,7 @@
 		purchaseToggler();
 		fbLikeButton();
 		twFollowButton();
-		googleMap();
+		// googleMap();
 		
 	});
 	/**

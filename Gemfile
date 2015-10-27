@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.6'
 
-gem "mongoid", "~> 4.0.0"
+gem "mongoid", "~> 5.0.0"
 gem 'bson_ext'
 gem 'angularjs-rails', '~> 1.2.25'
 gem 'bootstrap-sass', '~> 3.2.0.2'

@@ -1,15 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>TheGadgetsExpress</title>
-   <meta name="description" content="Get cash for used cell phones and electronics. Sell your iPhone, Samsung Galaxy, iPad, Apple computers and more. Free shipping and fast payment!" />
-    <meta name="keywords" content="sell electronics, recycle electronics, electronics trade in, trade in electronics, cash for electronics, sell gadgets, electronics buy back" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Gexpress</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+<!DOCTYPE html><html><head>
+<meta charset="UTF-8">
+<title>TheGadgetsExpress</title>
+<meta name="description" content="Get cash for used cell phones and electronics. Sell your iPhone, Samsung Galaxy, iPad, Apple computers and more. Free shipping and fast payment!" />
+<meta name="keywords" content="sell electronics, recycle electronics, electronics trade in, trade in electronics, cash for electronics, sell gadgets, electronics buy back" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
+<title>TheGadgetExpress-Fastest way to sell you devices</title>
+<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+<%= csrf_meta_tags %>
 </head>
 <body ng-app="gexpress">
 	<!-- header -->
@@ -27,16 +25,16 @@
 						<li class="active"><a href="index">HOME</a></li>
 						<li><a href="about-us">ABOUT US</a></li>
 					<!-- 	<li><a href="#">OUR SERVICES</a></li> -->
-						<li><a href="sell-iphone">SELL IPHONE</a></li>
-						<li><a href="sell-ipad">SELL IPAD</a></li>
-						<li><a href="sell-ipod">SELL IPOD</a></li>
-						<li><a href="contact">CONTACT US</a></li>
+						<li><a href="/sell-iphone">SELL IPHONE</a></li>
+						<li><a href="/sell-ipad">SELL IPAD</a></li>
+						<li><a href="/sell-ipod">SELL IPOD</a></li>
+						<li><a href="/contact-us">CONTACT US</a></li>
 					</ul>
 				</nav>
 			</div>
 		</div>
 	</header> <!-- /header -->
-<ng-view></ng-view>
+<ng-view autoscroll="true"></ng-view>
 <footer>
 		<div class="container">
 			<div class="row">
@@ -50,9 +48,9 @@
 					<h4>Sitemap</h4>
 					<div class="row">
 						<ul class="col-xs-4">
-							<li><a href="#">Home</a></li>
-							<li><a href="about-us">About us</a></li>
-							<li><a href="contact-us">Contact us</a></li>
+							<li><a href="/">Home</a></li>
+							<li><a href="/about-us">About us</a></li>
+							<li><a href="/contact-us">Contact us</a></li>
 							<!-- <li><a href="#">Select Device</a></li>
 							<li><a href="#">Buy Phone</a></li>
 							<li><a href="#">How it Works</a></li> -->
@@ -111,3 +109,4 @@
 	</section> <!-- /#footer-bar -->
 </body>
 </html>
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>

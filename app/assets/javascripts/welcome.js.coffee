@@ -221,7 +221,6 @@
     purchaseToggler()
     fbLikeButton()
     twFollowButton()
-    googleMap()
     return
 
   ###*

@@ -1,0 +1,113 @@
+<div ng-controller="shippingcntrl">
+<section id="purchase-content">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 purchase-title pull-left">
+					<div class="clearfix">
+						<h2 class="pull-left">Provide your shipping address</h2> <a href="checkout-checkcard.html"><button class="pull-left hvr-bounce-to-right">Go Back</button></a>
+					</div>
+					<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+
+				</div>
+				<div class="col-lg-4 purchase-help pull-right">
+					<p class="social-share-wrap">
+						<div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
+					
+						<a href="https://twitter.com/share" class="twitter-share-button" data-via="ashikur1993">Tweet</a>
+					</p>
+					<p>Do you have any questions? <a href="#">Help Center</a></p>
+				</div>
+			</div>
+			<div class="row checkout-box">
+				<div class="col-lg-8">
+					<div class="row form-box">
+						<form>
+							<div class="col-lg-6">
+								<p>
+									<label>Payable to:</label>
+									<input type="text" placeholder="Enter First Name" ng-model="shippingAddress.fname" required="">
+									<div ng-show="shippingAddress.$submitted || shippingAddress.fname.$touched">
+										<span ng-show="shippingAddress.fname.$error.required">Enter the First name.</span>
+									</div>
+								</p>
+							</div>
+							<div class="col-lg-6">	
+								<p>
+									<label>&nbsp;</label>
+									<input type="text" placeholder="Enter Last Name" ng-model="shippingAddress.lname" required="">
+									<div ng-show="shippingAddress.$submitted || shippingAddress.lname.$touched">
+										<span ng-show="shippingAddress.lname.$error.required">Enter the Last name.</span>
+									</div>	
+								</p>
+							</div>
+							<div class="col-lg-6">
+								<p>
+									<label>Address Line 1:</label>
+									<input type="text" placeholder="Enter Your Address" ng-model="shippingAddress.addr" required="">
+									<div ng-show="shippingAddress.$submitted || shippingAddress.addr.$touched">
+										<span ng-show="shippingAddress.addr.$error.required">Enter the Address.</span>
+									</div>
+								</p>
+							</div>
+							<div class="col-lg-6">									
+								<p>
+									<label>Address Line 2 (Optional):</label>
+									<input type="text" ng-model="shippingAddress.addr1">
+								</p>
+							</div>
+							<div class="col-lg-5">
+								<p>
+									<label>City:</label>
+									<input type="text" placeholder="City" ng-model="shippingAddress.city" required="">
+									<div ng-show="shippingAddress.$submitted || shippingAddress.city.$touched">
+										<span ng-show="shippingAddress.city.$error.required">Enter the City.</span>
+									</div>	
+								</p>
+							</div>
+							<div class="col-lg-5">
+								<p>
+									<label>State:</label>
+									<input type="text" name="state" placeholder="State" ng-model="shippingAddress.state" required="">
+									<div ng-show="shippingAddress.$submitted || shippingAddress.state.$touched">
+										<span ng-show="shippingAddress.state.$error.required">Enter the State.</span>		
+									</div>
+								</p>
+							</div>
+							<div class="col-lg-2">
+								<p>
+									<label>Zip:</label>
+									<input type="text" placeholder="Enter Zip" ng-model="shippingAddress.zip" required="">
+									<div ng-show="shippingAddress.$submitted || shippingAddress.zip.$touched">
+										<span ng-show="shippingAddress.state.$error.required">Enter the Zipcode.</span>	
+									</div>		
+								</p>
+							</div>
+							<div class="col-lg-6">
+								<p>
+									<label>Email:</label>
+									<input type="text" placeholder="Enter Email" ng-model="shippingAddress.email" required="">
+									<div ng-show="shippingAddress.$submitted || shippingAddress.email.$touched">
+										<span ng-show="shippingAddress.state.$error.required">Enter the Email.</span>
+									</div>	
+								</p>
+								
+							</div>
+							<div class="col-lg-6">
+								<p>
+									<label>Phone (Optional):</label>
+									<input type="text" placeholder="Enter Phone" ng-model="shippingAddress.phone">
+								</p>
+								
+							</div>							
+							<div class="col-lg-6 pull-right">
+								<p>
+									<button type="submit" class="hvr-bounce-to-right" ng-click="saveAddr(shippingAddress)">Continue <i class="fa fa-angle-right"></i></button>
+								</p>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>	
