@@ -1,4 +1,4 @@
-var gexpress = angular.module('gexpress', ['ngResource','ngRoute','ngCookies', 'uiGmapgoogle-maps', 'nemLogging']);
+var gexpress = angular.module('gexpress', ['ngResource','ngRoute','ngCookies']);
 
 gexpress.config(['$routeProvider', '$locationProvider', '$httpProvider', 
   function($routeProvider, $locationProvider, $httpProvider) {
@@ -29,23 +29,6 @@ gexpress.controller("thankyoucntrl", ['$scope','$cookieStore', '$location', func
 }]);
 
 gexpress.controller("contactuscntrl", ['$scope','$cookieStore', '$location', function($scope, $cookieStore, $location) {
-    // $scope.loadmap = function() {
-      
-    //  var map;
-    //         map = new GMaps({
-    //             div: '#gmap',
-    //             control: false,
-    //             lat: -37.812802,
-    //             lng: 144.956981
-    //         });
-    //         map.addMarker({
-    //             icon: 'img/map-marker.png',
-    //             lat: -37.812802,
-    //             lng: 144.956981,
-    //             title: 'Envato HeadQuarter'
-    //         });
-    // }
-    // $scope.loadmap()
     $scope.map = { center: { latitude:  -37.812802, longitude: 144.956981 }, zoom: 8 };
 }]);
 
