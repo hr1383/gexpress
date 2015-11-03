@@ -35,9 +35,9 @@
 					<span class="fa ng-class:{'fa-check active' : selectCarrier}">2</span> 
 					Select your carrier</p>
 					<div class="choose-carrier clearfix">
-						<span ng-repeat="carrier in carriers">
+						<span ng-repeat="carrier in device_carrier">
 							<div class="single-carrier ng-class:{'active' : $index==selectedCarrierIndex}">
-								<img ng-src='<%=asset_path("{{carrier[1]}}")%>' alt="" ng-click="setCarrier(carrier[0], $index)">
+								<img ng-src='<%=asset_path("{{carriers[carrier]}}")%>' alt="" ng-click="setCarrier(carrier, $index)">
 							</div>
 						</span>
 					</div>						

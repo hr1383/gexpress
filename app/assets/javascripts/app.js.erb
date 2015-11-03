@@ -1,4 +1,4 @@
-var gexpress = angular.module('gexpress', ['ngResource','ngRoute','ngCookies']);
+var gexpress = angular.module('gexpress', ['ngResource','ngRoute','ngCookies', 'uiGmapgoogle-maps']);
 
 gexpress.config(['$routeProvider', '$locationProvider', '$httpProvider', 
   function($routeProvider, $locationProvider, $httpProvider) {
@@ -96,8 +96,17 @@ gexpress.controller("checkoutcntrl",['$scope', '$cookieStore', '$location', '$ht
    $scope.checkSelected=true
    $scope.payment_method='check'
    $scope.saveAddr = function(address) {
-        if ($scope.payment.$valid) {
-          sku = $cookieStore['sku']
+        console.log($scope.paypal_payment.$valid)
+        if ($scope.checkSelected && $scope.payment.$valid) {
+              createOrder(address)
+        } else if($scope.paypal_payment.$valid) {
+          createOrder(address)
+        } else {
+          $scope.payment.submitted = true
+        }
+   };
+   createOrder = function(address) {
+    sku = $cookieStore['sku']
           $http.post('/orders.json', {'sku': sku, 'billing' : address, 
             'payment_method': $scope.payment_method}).
           then(function(response) { 
@@ -107,12 +116,8 @@ gexpress.controller("checkoutcntrl",['$scope', '$cookieStore', '$location', '$ht
           }, function(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
-          });
-        } else {
-          $scope.payment.submitted = true
-        }
-   };
-
+          });  
+   }
    $scope.selectPayment = function(payment) {
     if(payment == 'check') {
       $scope.payment_method = 'check';
@@ -156,8 +161,8 @@ gexpress.controller("iphonecontroller", ['$scope', '$http', '$location','$window
                        ["Iphone 6 Plus","img/choose-phone/1.png","iphone6plus"], 
                        ["Iphone 6", "img/choose-phone/2.png", "iphone6"],
                        ["Iphone 5S", "img/choose-phone/3.png","iphone5s"],
-                       ["Iphone 5","img/choose-phone/4.png","iphone5"],
-                       ["Iphone 5C","img/choose-phone/5.png","iphone5c"],
+                       ["Iphone 5","img/choose-phone/5.png","iphone5"],
+                       ["Iphone 5C","img/choose-phone/4.png","iphone5c"],
                        ["Iphone 4S", "img/choose-phone/6.png","iphone4s"],
                        ["Iphone 4", "img/choose-phone/7.png","iphone4"]
                        ];
@@ -196,11 +201,11 @@ gexpress.controller("iphonecontroller", ['$scope', '$http', '$location','$window
       $scope.device = device;
       console.log($scope.device)
       console.log($scope.sizes)
-      $scope.device_sizes = $scope.sizes[$scope.device];
+      $scope.device_sizes = $scope.sizes[$scope.device];      
       $scope.display_device = false;
     };
     
-    $scope.setCarrier = function(carrier, index) {
+    $scope.setCarrier = function(carrier, index) {      
       $scope.selectedCarrierIndex = index;
       $scope.selectCarrier = true;
       $scope.display_size = true;    
@@ -233,43 +238,57 @@ gexpress.controller("ipadcontroller", ['$scope', '$http', '$location','$window',
   $scope.selectedIndex = -1;
     $scope.devices = [
                        ["Ipad Air 1", "img/ipad/ipad_air.png", "ipadair1"],
-                       ["Ipad Air 2", "img/ipad/ipad_air.png", "ipadair2"],
-                       ["Ipad Mini 2", "img/ipad/ipad_mini.png","ipadmini2"],
-                       ["Ipad Mini 3", "img/ipad/ipad_mini.png","ipadmini3"]
+                       ["Ipad Mini 3", "img/ipad/ipad_mini_1.jpg","ipadmini3"],
+                       ["Ipad 1st Gen", "img/ipad/ipad.png","ipadgen1"],
+                       ["Ipad 2nd Gen", "img/ipad/ipad.png","ipadgen2"],
+                       ["Ipad 3rd Gen", "img/ipad/ipad.png","ipadgen3"],
+                       ["Ipad 4th Gen", "img/ipad/ipad.png","ipadgen4"]
                        ];
 
-  $scope.carriers = [
-                        ["att","img/choose-carrier/att.png"],
-                        ["verizon","img/choose-carrier/verizon.png"],
-                        ["sprint","img/choose-carrier/sprint.png"],
-                        ["tmobile","img/choose-carrier/tmobile.png"],
-                        ["unlocked","img/choose-carrier/unlocked.png"]
-                        ];
-    $scope.sizes = {
-                      "ipad_mini_2":["16","32","64","128"],
-                      "ipad_mini_3":["16","64","128"],
-                      "ipad_air_1":["16","32","64","128"],
-                      "ipad_air_2":["16","64","128"]
+  $scope.carriers = {
+                        "att" : "img/choose-carrier/att.png",
+                        "verizon" : "img/choose-carrier/verizon.png",
+                        "sprint" : "img/choose-carrier/sprint.png",
+                        "tmobile" : "img/choose-carrier/tmobile.png",
+                        "unlocked" : "img/choose-carrier/unlocked.png",
+                        "wifi" : "img/choose-carrier/wifi.png"
                     };
+  $scope.device_carriers = {
+                              "ipadair1" : ["att", "verizon", "tmobile", "sprint", "wifi"],
+                              "ipadmini3" : ["att", "verizon", "tmobile", "sprint", "wifi"],
+                              "ipadgen1" : ["att", "wifi"],
+                              "ipadgen2" : ["att", "verizon", "wifi"],
+                              "ipadgen4" : ["att", "verizon", "wifi"],
+                              "ipadgen3" : ["att", "verizon", "wifi"]
+                            }
+    $scope.sizes = {
+                      "ipadair1":["16","32","64","128"],
+                      "ipadmini3":["16","64","128"],
+                      "ipadgen1":["16","32","64"],
+                      "ipadgen2":["16","32","64"],
+                      "ipadgen3":["16","32","64"],
+                      "ipadgen4":["16","32","64","128"]
+                    };
+
     $scope.types=[["Flawless", "Looks like it has never been used.", "flawless"],
-    ["Good", "Normal signs of use.", "good"],
-    ["Broken", "The phone does not turn on or has seroius physical damage.", "broken"],
-    ["Broken but working","Doesn't turn on.", "bad"]];
+                  ["Good", "Normal signs of use.", "good"],
+                  ["Broken", "The phone does not turn on or has seroius physical damage.", "broken"],
+                  ["Broken but working","Doesn't turn on.", "bad"]];
     $scope.display_carrier = false;
     $scope.display_size = false;
     $scope.display_quality = false; 
     $scope.display_device = true;
     $scope.display_paid = false;
-    $scope.device_sizes = $scope.sizes['iphone6plus'];        
+    $scope.device_sizes = $scope.sizes['ipadair1'];  
+    $scope.device_carrier = $scope.device_carriers['ipadair1'];
 
     $scope.setDevice = function(device, index) {
       $scope.selectedDeviceIndex = index;
       $scope.selectDevice = true;
       $scope.display_carrier = true;
       $scope.device = device;
-      console.log($scope.device)
-      console.log($scope.sizes)
-      $scope.device_sizes = $scope.sizes[$scope.device];
+      $scope.device_sizes = $scope.sizes[device];
+      $scope.device_carrier = $scope.device_carriers[device]
       $scope.display_device = false;
     };
     

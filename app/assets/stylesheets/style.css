@@ -1101,7 +1101,7 @@ footer .subscribe button[type='submit']:before {
 **/
 
 #contact-section {
-	padding: 50px 0;
+	padding: 100px 0;
 	border-top: 1px solid #D6D6D6;
 }
 #contact-section #gmap {
@@ -1195,7 +1195,7 @@ footer .subscribe button[type='submit']:before {
 **/
 
 #page-content {
-	padding: 50px 0 150px;
+	padding: 100px 0 150px;
 	border-top: 1px solid #D6D6D6;
 }
 #page-content .container .col-lg-9 h2,
@@ -1286,4 +1286,4 @@ footer .subscribe button[type='submit']:before {
     text-decoration: underline;
     margin-left: 15px;
 }
-.angular-google-map-container { height: 400px; }
+.angular-google-map-container { height: 300px; }
