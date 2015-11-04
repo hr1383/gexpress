@@ -322,7 +322,7 @@ header .nav-toggler:before {
 **/
 
 #select-phone {
-	padding: 50px 0;
+	padding: 80px 0;
 }
 #select-phone .sec-title p {
 	color: #6A4699;
@@ -339,7 +339,7 @@ header .nav-toggler:before {
 	margin: auto;
 }
 #select-phone .col-lg-4 img.img-small {
-	padding-top: 42px;
+	padding-top: 20px;
 }
 #select-phone .col-lg-4 a {
 	padding: 0 50px;
@@ -351,12 +351,41 @@ header .nav-toggler:before {
 	background: #5DBC3C;
 	color: #fff;
 	font-weight: 600;
-	margin: 45px 0 25px;
+	margin: 25px 0 25px;
 }
 #select-phone .col-lg-4 a:before {
 	background: #6A4699;
 	border-radius: 5px;
 }
+
+#select-phone .row .submit button {
+	background: #5DBC3C;
+	color: #fff;
+	font-size: 16px;
+	line-height: 45px;
+	font-weight: 600;
+	text-transform: capitalize;
+	border: none;
+	outline: none;
+	text-align: center;
+	border-radius: 5px;
+	padding: 0 40px;
+	display: block;
+	margin: 0 auto;
+}
+#select-phone .row .submit button i {
+	font-size: 16px;
+	line-height: 45px;
+	color: #fff;
+	margin-left: 5px;
+	font-weight: 600;
+}
+#select-phone .row .submit button:before {
+	background: #6A4699;
+	border-radius: 5px;
+}
+
+
 #select-phone .col-lg-4 .top-sell {
 	background: url('../img/select-phone/top-sell-flag.png') no-repeat center center;
 	width: 167px;

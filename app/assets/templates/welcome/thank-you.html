@@ -1,15 +1,16 @@
 <div ng-controller="thankyoucntrl">
-<section id="purchase-content">
+<section id="select-phone">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-12 purchase-title-center">
-					<h2>Your orderId for further inquiry is {{order_id}} and we will send an email on {{email}} with details.</h2> 
-				</div>
-				<div class="col-lg-12 purchase-title-center pull-left">
-					<h2>To ship the device faster, click below to print the shipping label.</h2>
+				<div class="col-lg-12 sec-title">
+					<p>Thanks!! Please click the below button to print your FREE shipping label.</p>
+					<p>Your orderId for further inquiry is {{order_id}} and we will send an email on {{email}} with details.</p> 
 				</div>	
-				<div class="col-lg-12 purchase-title-shipping">
+				<div class="col-lg-12 submit">
 					<button ng-click="print()">Print Shipping Label <i class="fa fa-angle-right"></i></button>
+				</div>
+				<div class="col-lg-12 sec-title">
+					<p>You are one step closer to getting the cash in your pocket.</p>
 				</div>	
 			</div>									
 		</div>
