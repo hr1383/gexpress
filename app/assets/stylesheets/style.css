@@ -1242,6 +1242,18 @@ footer .subscribe button[type='submit']:before {
 	color: #667C95;
 	font-weight: 600;
 }
+
+#page-content .container .col-lg-9 ul li {
+	font-size: 13px;
+    line-height: 15px;
+    list-style-type: disc;
+    list-style-position: outside;
+    margin-left: 40px;
+    margin-bottom: 15px;
+    color: #888888;
+    line-height: 20px;
+}
+
 #page-content .container .col-lg-3 ul li .fa {
 	color: #5DBC3C;
 	margin-right: 10px;

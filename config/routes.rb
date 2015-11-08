@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
   get 'sell-iphone' => 'application#index'
   get 'sell-ipad' => 'application#index'
+  get 'sell-ipod' => 'application#index'
   get 'offer' => 'application#index'
   get 'about-us' => 'application#index'
   get 'contact-us' => 'application#index'
@@ -16,6 +17,7 @@ Rails.application.routes.draw do
   get 'shipping' => 'application#index'
   get 'confirm-details' => 'application#index'
   get 'thank-you' => 'application#index'
+  get 'legal' => 'application#index'
   get 'home' => 'welcome#index'
   post 'orders' => 'order#create'
   # Example of regular route:
@@ -23,7 +25,8 @@ Rails.application.routes.draw do
     # get 'contact' => 'welcome#contact'
     # get 'sell' => 'welcome#sell'
     # get 'offer' => 'offer#index'
-    get ':device/:carrier/:size/:condition/offer' => 'application#index'
+  get ':device/:carrier/:size/:condition/offer' => 'application#index'
+  get ':device/:size/:condition/offer' => 'application#index'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
