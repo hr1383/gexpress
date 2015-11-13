@@ -82,7 +82,7 @@ gexpress.controller("offercontroller",['$scope', '$http', '$routeParams','$cooki
     var url = "/sku/"+$routeParams['device']+'/'+$routeParams['carrier']+'/'+$routeParams['memory']
                 +'/'+$routeParams['condition']+"/price.json";
     $http.get(url).success(function(sku) {
-//          console.log(sku)
+         console.log(sku)
           $scope.sku = sku
           $cookieStore['sku'] = sku
         });
