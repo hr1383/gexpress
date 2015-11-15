@@ -93,7 +93,9 @@ gexpress.controller("offercontroller",['$scope', '$http', '$routeParams','$cooki
 
 gexpress.controller("checkoutcntrl",['$scope', '$cookieStore', '$location', '$http', 
   function($scope, $cookieStore, $location, $http) {
-   console.log("at checkout " + $cookieStore['sku']);
+   if ($cookieStore['sku'] == undefined) {
+    $location.path("/")
+   }
    $scope.checkSelected=true
    $scope.payment_method='check'
    $scope.saveAddr = function(address) {
@@ -149,10 +151,9 @@ $scope.initSlider = function () {
           });          
       };
   $scope.initSlider();
-  $scope.gotoDiv = function() {
-    console.log("Hello")
-    $location.hash("select-device")
-  }
+  // $scope.gotoDiv = function() {
+  //   $location.hash("select-device")
+  // }
 }]);
 
 gexpress.controller("iphonecontroller", ['$scope', '$http', '$location','$window', function($scope, $http, $location, $window) {
@@ -243,15 +244,15 @@ gexpress.controller("ipadcontroller", ['$scope', '$http', '$location','$window',
                        ["Ipad", "img/ipad/ipad.png","ipad"]];
 
   $scope.devices_models = {
-                            "ipadair" : [["1st Gen", "img/ipad/ipad_air.png", "ipadairgen1"], 
-                                         ["2nd Gen", "img/ipad/ipad_air.png", "ipadairgen2"]],
-                            "ipadmini" : [["iPad Mini", "img/ipad/ipad_mini_1.jpg", "ipadmini"], 
-                                          ["iPad Mini2", "img/ipad/ipad_mini_1.jpg", "ipadmini2"],
-                                          ["iPad Mini3", "img/ipad/ipad_mini_1.jpg", "ipadmini3"]],
-                            "ipad": [["1st Gen", "img/ipad/ipad.png", "ipadgen1"], 
-                                     ["2nd Gen", "img/ipad/ipad.png", "ipadgen2"], 
-                                     ["3rd Gen", "img/ipad/ipad.png", "ipadgen3"], 
-                                     ["4th Gen", "img/ipad/ipad.png", "ipadgen4"]]             
+                            "ipadair" : [["1st Gen", "ipadairgen1"], 
+                                         ["2nd Gen", "ipadairgen2"]],
+                            "ipadmini" : [["iPad Mini", "ipadmini"], 
+                                          ["iPad Mini2", "ipadmini2"],
+                                          ["iPad Mini3", "ipadmini3"]],
+                            "ipad": [["1st Gen", "ipadgen1"], 
+                                     ["2nd Gen", "ipadgen2"], 
+                                     ["3rd Gen", "ipadgen3"], 
+                                     ["4th Gen", "ipadgen4"]]             
                         }
    $scope.carriers = {
                         "att" : "img/choose-carrier/att.png",

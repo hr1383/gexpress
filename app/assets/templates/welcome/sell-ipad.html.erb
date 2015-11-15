@@ -20,7 +20,6 @@
 					<span class="fa ng-class:{'fa-check active' : selectDevice}">1</span> Select the iPad.</p>
 					<div class="choose-phone clearfix">
 						<span ng-repeat="device in devices">
-							<!-- {{$parent.selected}} -->
 							<div class="single-phone ng-class:{'active' : $index==selectedDeviceIndex}">
 								<img ng-src='<%=asset_path("{{device[1]}}")%>' alt="" ng-click="setDevice(device[2], $index)">
 								<h4>{{device[0]}}</h4>
@@ -34,10 +33,10 @@
 					<p ng-class="{'active': select_device_model}">
 					<span class="fa ng-class:{'fa-check active' : select_device_model}">2</span> Select the model.</p>
 					<div class="choose-phone clearfix">						
-						<span ng-repeat="model in device_models">
-							<div class="single-phone ng-class:{'active' : $index==selected_device_model_index}"> 
-								<img ng-src='<%=asset_path("{{model[1]}}")%>' alt="" ng-click="setDeviceModel(model[2], $index)"><h4>{{model[0]}}</h4>
-							</div>
+						<span ng-repeat="model in device_models">				
+							<div class="col-lg-2 submit">
+								<div class="ng-class:{'active' : $index==selected_device_model_index}"><button class="hvr-bounce-to-right" ng-click="setDeviceModel(model[1], $index)">{{model[0]}}</button></div>
+							</div>	
 						</span>					
 					</div>
 				</div>

@@ -8,12 +8,11 @@ class Emailer < MandrillMailer::TemplateMailer
                   # vars: {
                   #   'FIRST_NAME' => user.firstname
                   # },
+                  vars: {
+                    'ORDER' => 1232
+                  },
                   important: true,
                   inline_css: true                  
-                  
-  end
-  unless Rails.env.production?
-    ENV['FROM_MAIL'] = 'test@test.com'
-    ENV['TO_MAIL'] = 'test@test.com'
+    puts "sent an email"                  
   end
 end
