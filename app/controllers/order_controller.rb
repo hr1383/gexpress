@@ -7,7 +7,6 @@ class OrderController < ApplicationController
 		order = Order.new(:lname => billing['lname'],
 						  :fname => billing['fname'],
 						  :sku_model => sku['device'],
-						  :sku_size => sku['size'],
 						  :sku_memory => sku['size'],
 						  :sku_state => sku['state'],
 						  :sku_carrier => sku['carrier'],
@@ -27,10 +26,11 @@ class OrderController < ApplicationController
 						  :billing_phone => billing['phone'],
 						  :billing_email => billing['email'],
 						  :paypal_email => billing['paypalemail'],
+						  :created_at => Time.now.strftime("%d/%m/%Y %H:%M")
 						  :order_status => 'NEW')
 		order.save
 		if Rails.env.production?
-			Emailer.new_order.deliver
+			Emailer.email_admin(order).deliver
 		end
 		respond_to do |format|    	
     		format.json  { render :json => order.to_json }
