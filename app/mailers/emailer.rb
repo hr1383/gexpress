@@ -22,7 +22,7 @@ class Emailer < MandrillMailer::TemplateMailer
                     'SKU_CARRIER' => order.sku_carrier,
                     'PAYMENT_METHOD' => order.payment_method,
                     'CREATED_AT' => order.created_at
-                  }
+                  },
                   important: true,
                   inline_css: true           
   end
