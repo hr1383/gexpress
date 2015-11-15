@@ -13,7 +13,7 @@ class Emailer < MandrillMailer::TemplateMailer
     mandrill_mail template: 'gexpress-admin',
                   subject: 'New order at your door',
                   to: ENV['TO_ADMIN_MAIL'].split(","),
-                  var: {
+                  vars: {
                     'ORDER_ID' => order.order_id,
                     'CUST_NAME' => order.fname + " " + order.lname,
                     'SKU_MODEL' => order.sku_model,
