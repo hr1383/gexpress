@@ -26,7 +26,7 @@ class OrderController < ApplicationController
 						  :billing_phone => billing['phone'],
 						  :billing_email => billing['email'],
 						  :paypal_email => billing['paypalemail'],
-						  :created_at => Time.now.strftime("%d/%m/%Y %H:%M")
+						  :created_at => Time.now.strftime("%d/%m/%Y %H:%M"),
 						  :order_status => 'NEW')
 		order.save
 		if Rails.env.production?
