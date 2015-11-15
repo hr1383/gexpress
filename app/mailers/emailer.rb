@@ -5,11 +5,10 @@ class Emailer < MandrillMailer::TemplateMailer
     mandrill_mail template: 'gexpress-new',
                   subject: 'Thanks for signing up',
                   to: ENV['TO_MAIL'],
-                  # vars: {
-                  #   'FIRST_NAME' => user.firstname
-                  # },                  
+                  vars: {
+                    'ORDER' => '123'
+                  },                  
                   important: true,
-                  inline_css: true                  
-    # puts "sent an email"                  
+                  inline_css: true           
   end
 end
