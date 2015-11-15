@@ -7,10 +7,7 @@ class Emailer < MandrillMailer::TemplateMailer
                   to: ENV['TO_MAIL'],
                   # vars: {
                   #   'FIRST_NAME' => user.firstname
-                  # },
-                  vars: {
-                    'ORDER' => 1232
-                  },
+                  # },                  
                   important: true,
                   inline_css: true                  
     puts "sent an email"                  
