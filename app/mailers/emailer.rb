@@ -10,6 +10,6 @@ class Emailer < MandrillMailer::TemplateMailer
                   # },                  
                   important: true,
                   inline_css: true                  
-    puts "sent an email"                  
+    # puts "sent an email"                  
   end
 end
