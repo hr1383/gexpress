@@ -75,6 +75,11 @@
 			<div class="row">
 				<div class="col-lg-3 submit">
 					<button class="hvr-bounce-to-right" ng-click="offer()">Get Offer<i class="fa fa-angle-right"></i></button>
+					<!-- $scope.selectDevice && $scope.selectCarrier && $scope.selectMemory && $scope.selectCondition -->
+					<p ng-if="missing_selected && selectDevice == undefined" ng-class="error-msg">You have not selected device.</span></p>
+					<p ng-show="missing_selected && selectCarrier == undefined" ng-class="error-msg">You have not selected carrier.</span></p>
+					<p ng-show="missing_selected && selectMemory == undefined" ng-class="error-msg">You have not selected memory.</span></p>
+					<p ng-show="missing_selected && selectCondition == undefined" ng-class="error-msg">You have not selected device condition.</span></p>
 				</div>
 			</div>
 		</div>

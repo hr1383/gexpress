@@ -3,7 +3,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6 purchase-title pull-left">
-					<h2>Sell your phone with TheGadgetsexpress</h2>
+					<h2>Sell your iPod with TheGadgetsexpress</h2>
 				</div>
 				<div class="col-lg-4 purchase-help pull-right">
 					<!-- <p class="social-share-wrap">
@@ -17,7 +17,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<p ng-class="{'active': selectDevice}">
-					<span class="fa ng-class:{'fa-check active' : selectDevice}">1</span> Select the device</p>
+					<span class="fa ng-class:{'fa-check active' : selectDevice}">1</span> Select the iPod</p>
 					<div class="choose-phone clearfix">
 						<span ng-repeat="device in devices">
 							{{$parent.selected}}
@@ -74,6 +74,10 @@
 			<div class="row">
 				<div class="col-lg-3 submit">
 					<button class="hvr-bounce-to-right" ng-click="offer()">Get Offer<i class="fa fa-angle-right"></i></button>
+					<p ng-if="missing_selected && selectDevice == undefined" ng-class="error-msg">You have not selected device.</span></p>
+					<p ng-show="missing_selected && select_device_model == undefined" ng-class="error-msg">You have not selected device model.</span></p>
+					<p ng-show="missing_selected && selectMemory == undefined" ng-class="error-msg">You have not selected memory.</span></p>
+					<p ng-show="missing_selected && selectCondition == undefined" ng-class="error-msg">You have not selected device condition.</span></p>
 				</div>
 			</div>
 		</div>
