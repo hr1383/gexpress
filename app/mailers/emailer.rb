@@ -5,7 +5,7 @@ class Emailer < MandrillMailer::TemplateMailer
     mandrill_mail template: 'gexpress-order',
                   # subject: 'Thanks for signing up',
                   to: email,
-                  :async: true,
+                  async: true,
                   vars: {
                      'ORDER_ID' => order_id
                     },              
@@ -17,7 +17,7 @@ class Emailer < MandrillMailer::TemplateMailer
     mandrill_mail template: 'gexpress-admin',
                   subject: 'New order at your door',
                   to: ENV['TO_ADMIN_MAIL'].split(","),
-                  :async: true,
+                  async: true,
                   vars: {
                     'ORDER_ID' => order.order_id,
                     'CUST_NAME' => order.fname + " " + order.lname,
