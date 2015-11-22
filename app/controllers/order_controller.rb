@@ -31,6 +31,11 @@ class OrderController < ApplicationController
 		order.save
 		if Rails.env.production?
 			Emailer.email_admin(order).deliver
+			if order.payment_method == 'check'
+				Emailer.new_order(order.order_id, order.paypal_email)
+			else 	
+				Emailer.new_order(order.order_id, order.billing_email)
+			end	
 		end
 		respond_to do |format|    	
     		format.json  { render :json => order.to_json }

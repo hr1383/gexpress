@@ -1,10 +1,14 @@
 class Emailer < MandrillMailer::TemplateMailer
 	default from: ENV['FROM_MAIL']
 
-	def new_order
-    mandrill_mail template: 'gexpress-new-order',
-                  subject: 'Thanks for signing up',
-                  to: ENV['TO_MAIL'],                  
+	def new_order(order_id, email)
+    mandrill_mail template: 'gexpress-order',
+                  # subject: 'Thanks for signing up',
+                  to: email,
+                  :async: true,
+                  vars: {
+                     'ORDER_ID' => order_id
+                    },              
                   important: true,
                   inline_css: true           
   end
@@ -13,6 +17,7 @@ class Emailer < MandrillMailer::TemplateMailer
     mandrill_mail template: 'gexpress-admin',
                   subject: 'New order at your door',
                   to: ENV['TO_ADMIN_MAIL'].split(","),
+                  :async: true,
                   vars: {
                     'ORDER_ID' => order.order_id,
                     'CUST_NAME' => order.fname + " " + order.lname,
