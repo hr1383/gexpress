@@ -30,7 +30,7 @@ class OrderController < ApplicationController
 						  :order_status => 'NEW')
 		order.save
 		if Rails.env.production?
-			Emailer.email_admin(order).deliver
+			#Emailer.email_admin(order).deliver
 			if order.payment_method == 'check'
 				puts "sending new order for check" + order.billing_email
 				Emailer.new_order(order.order_id, order.billing_email)
