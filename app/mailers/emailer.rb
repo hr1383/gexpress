@@ -2,7 +2,7 @@ class Emailer < MandrillMailer::TemplateMailer
 	default from: ENV['FROM_MAIL']
 
 	def new_order(order_id, email)
-    mandrill_mail template: 'gexpress-order',
+    mandrill_mail template: 'gexpress-admin',
                   to: email,
                   async: true,
                   vars: {
