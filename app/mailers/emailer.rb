@@ -3,7 +3,6 @@ class Emailer < MandrillMailer::TemplateMailer
 
 	def new_order(order_id, email)
     mandrill_mail template: 'gexpress-order',
-                  # subject: 'Thanks for signing up',
                   to: email,
                   async: true,
                   vars: {

@@ -32,9 +32,11 @@ class OrderController < ApplicationController
 		if Rails.env.production?
 			Emailer.email_admin(order).deliver
 			if order.payment_method == 'check'
-				Emailer.new_order(order.order_id, order.paypal_email)
-			else 	
+				puts "sending new order for check" + order.billing_email
 				Emailer.new_order(order.order_id, order.billing_email)
+			else 
+				puts "sending new order for paypal" + order.paypal_email
+				Emailer.new_order(order.order_id, order.paypal_email)
 			end	
 		end
 		respond_to do |format|    	
