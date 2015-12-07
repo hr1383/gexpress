@@ -135,18 +135,23 @@ gexpress.controller("offercontroller", ['$scope', '$http', '$routeParams', '$coo
 
 gexpress.controller("checkoutcntrl", ['$scope', '$cookieStore', '$location', '$http',
     function($scope, $cookieStore, $location, $http) {
-        if ($cookieStore['sku'] == undefined) {
-            $location.path("/")
-        }
+        // if ($cookieStore['sku'] == undefined) {
+        //     $location.path("/")
+        // }
         $scope.checkSelected = true
         $scope.payment_method = 'check'
         $scope.saveAddr = function(address) {
+            console.log("paypal " + $scope.paypal_payment.$valid)
             if ($scope.checkSelected && $scope.payment.$valid) {
                 createOrder(address)
             } else if ($scope.paypal_payment.$valid) {
-                createOrder(address)
-            } else {
-                $scope.payment.submitted = true
+                createOrder(address)                
+            } 
+            if($scope.checkSelected) {
+              $scope.payment.submitted = true
+            }
+            else {
+              $scope.paypal_payment.submitted = true                
             }
         };
         createOrder = function(address) {
@@ -293,8 +298,8 @@ gexpress.controller("ipadcontroller", ['$scope', '$http', '$location', '$window'
     $scope.skus = [];
     $scope.selectedIndex = -1;
     $scope.devices = [
-        ["iPad Air ", "img/ipad/ipad.png", "ipadair"],
         ["iPad Mini", "img/ipad/ipad_mini_1.jpg", "ipadmini"],
+        ["iPad Air ", "img/ipad/ipad.png", "ipadair"],        
         ["iPad", "img/ipad/ipad.png", "ipad"]
     ];
 
@@ -337,8 +342,8 @@ gexpress.controller("ipadcontroller", ['$scope', '$http', '$location', '$window'
     $scope.sizes = {
         "ipadairgen1": ["16", "32", "64", "128"],
         "ipadairgen2": ["16", "32", "64", "128"],
-        "ipadmini": ["16", "64", "128"],
-        "ipadmini2": ["16", "64", "128"],
+        "ipadmini": ["16", "32", "64"],
+        "ipadmini2": ["16", "32", "64", "128"],
         "ipadmini3": ["16", "64", "128"],
         "ipadgen1": ["16", "32", "64"],
         "ipadgen2": ["16", "32", "64"],
