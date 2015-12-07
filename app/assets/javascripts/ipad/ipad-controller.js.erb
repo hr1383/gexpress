@@ -1,0 +1,129 @@
+angular.module('ipad', [])
+
+.config(['$routeProvider', function ($routeProvider) {
+  // $locationProvider.html5Mode(true);
+  $routeProvider.when('/sell-ipad', {
+    templateUrl: "<%= asset_path('sell-ipad.html') %>",
+    controller:'IpadCtrl'    
+  });
+}])
+
+.controller('IpadCtrl', ['$scope', '$http', '$location', '$window', function($scope, $http, $location, $window) {
+      $scope.skus = [];
+    $scope.selectedIndex = -1;
+    $scope.devices = [
+        ["iPad Mini", "img/ipad/ipad_mini_1.jpg", "ipadmini"],
+        ["iPad Air ", "img/ipad/ipad.png", "ipadair"],        
+        ["iPad", "img/ipad/ipad.png", "ipad"]
+    ];
+
+    $scope.devices_models = {
+        "ipadair": [
+            ["1st Gen", "ipadairgen1"],
+            ["2nd Gen", "ipadairgen2"]
+        ],
+        "ipadmini": [
+            ["iPad Mini", "ipadmini"],
+            ["iPad Mini2", "ipadmini2"],
+            ["iPad Mini3", "ipadmini3"]
+        ],
+        "ipad": [
+            ["1st Gen", "ipadgen1"],
+            ["2nd Gen", "ipadgen2"],
+            ["3rd Gen", "ipadgen3"],
+            ["4th Gen", "ipadgen4"]
+        ]
+    }
+    $scope.carriers = {
+        "att": "img/choose-carrier/att.png",
+        "verizon": "img/choose-carrier/verizon.png",
+        "sprint": "img/choose-carrier/sprint.png",
+        "tmobile": "img/choose-carrier/tmobile.png",
+        "unlocked": "img/choose-carrier/unlocked.png",
+        "wifi": "img/choose-carrier/wifi.png"
+    };
+    $scope.device_carriers = {
+        "ipadairgen1": ["att", "verizon", "tmobile", "sprint", "wifi"],
+        "ipadairgen2": ["att", "verizon", "tmobile", "sprint", "wifi"],
+        "ipadmini": ["att", "verizon", "tmobile", "sprint", "wifi"],
+        "ipadmini2": ["att", "verizon", "tmobile", "sprint", "wifi"],
+        "ipadmini3": ["att", "verizon", "tmobile", "sprint", "wifi"],
+        "ipadgen1": ["att", "wifi"],
+        "ipadgen2": ["att", "verizon", "wifi"],
+        "ipadgen4": ["att", "verizon", "wifi"],
+        "ipadgen3": ["att", "verizon", "wifi"]
+    }
+    $scope.sizes = {
+        "ipadairgen1": ["16", "32", "64", "128"],
+        "ipadairgen2": ["16", "32", "64", "128"],
+        "ipadmini": ["16", "32", "64"],
+        "ipadmini2": ["16", "32", "64", "128"],
+        "ipadmini3": ["16", "64", "128"],
+        "ipadgen1": ["16", "32", "64"],
+        "ipadgen2": ["16", "32", "64"],
+        "ipadgen3": ["16", "32", "64"],
+        "ipadgen4": ["16", "32", "64", "128"]
+    };
+
+    $scope.types = [
+        ["Flawless", "Looks like it has never been used.", "flawless"],
+        ["Good", "Normal signs of use.", "good"],
+        ["Broken but working", "Doesn't turn on.", "bad"],
+        ["Broken", "The phone does not turn on or has seroius physical damage.", "broken"],
+    ];
+    $scope.display_carrier = false;
+    $scope.display_size = false;
+    $scope.display_quality = false;
+    $scope.display_device = true;
+    $scope.display_paid = false;
+    $scope.device_models = $scope.devices_models['ipadair']
+    $scope.device_sizes = $scope.sizes['ipadairgen1'];
+    $scope.device_carrier = $scope.device_carriers['ipadairgen1'];
+
+    $scope.setDevice = function(device, index) {
+        $scope.selectedDeviceIndex = index;
+        $scope.selectDevice = true;
+        $scope.device = device;
+        $scope.display_device = false;
+        $scope.device_models = $scope.devices_models[device]
+    };
+
+    $scope.setDeviceModel = function(device_model, index) {
+        $scope.select_device_model = true;
+        $scope.selected_device_model_index = index;
+        $scope.display_carrier = true;
+        $scope.device_sizes = $scope.sizes[device_model];
+        $scope.device_carrier = $scope.device_carriers[device_model]
+        $scope.device_model = device_model
+    }
+
+    $scope.setCarrier = function(carrier, index) {
+        $scope.selectedCarrierIndex = index;
+        $scope.selectCarrier = true;
+        $scope.display_size = true;
+        $scope.carrier = carrier
+    };
+
+    $scope.setSize = function(size, index) {
+        $scope.selectedMemoryIndex = index;
+        $scope.selectMemory = true;
+        $scope.memory = size;
+        $scope.display_quality = true;
+    }
+
+    $scope.setCondition = function(condition, index) {
+        $scope.selectedConditionIndex = index;
+        $scope.selectCondition = true;
+        $scope.condition = condition;
+        $scope.display_offer = true;
+    }
+
+    $scope.offer = function() {
+      if ($scope.selectDevice && $scope.select_device_model && $scope.selectCarrier && $scope.selectCondition && $scope.selectMemory) {
+        var route = "/" + $scope.device_model + "/" + $scope.carrier + "/" + $scope.memory + "/" + $scope.condition + "/offer";
+        $location.path(route);
+      } else {
+        $scope.missing_selected = true
+      }
+    }
+}]);

@@ -1,0 +1,94 @@
+angular.module('ipod', [])
+
+.config(['$routeProvider', function ($routeProvider) {
+  // $locationProvider.html5Mode(true);
+  $routeProvider.when('/sell-ipod', {
+    templateUrl: "<%= asset_path('sell-ipod.html') %>",
+    controller:'IpodCtrl'    
+  });
+}])
+
+.controller('IpodCtrl', ['$scope', '$http', '$location', '$window', function($scope, $http, $location, $window) {
+  $scope.skus = [];
+    $scope.selectedIndex = -1;
+    $scope.devices = [
+        ["Touch ", "img/ipod/ipod.png", "ipodtouch"],
+        ["Nano", "img/ipod/ipod-nano.png", "ipodnano"],
+        ["Classic", "img/ipod/ipod-touch.png", "ipodclassic"]
+    ];
+
+    $scope.devices_models = {
+        "ipodtouch": [
+            ["5th Gen", "ipodtouchgen5"],
+            ["4th Gen", "ipodtouchgen4"],
+            ["3rd Gen", "ipodtouchgen3"]
+        ],
+        "ipodnano": [
+            ["7th Gen", "ipodnanogen7"],
+            ["6th Gen", "ipodnanogen6"]
+        ],
+        "ipodclassic": [
+            ["6th Gen", "ipodclassicgen6"],
+            ["5th Gen", "ipodclassicgen5"]
+        ]
+    }
+    $scope.sizes = {
+        "ipodtouchgen5": ["16", "32", "64"],
+        "ipodtouchgen4": ["8", "16", "32", "64"],
+        "ipodtouchgen3": ["32", "64"],
+        "ipodnanogen7": ["16", "8"],
+        "ipodnanogen6": ["16"],
+        "ipodclassicgen6": ["120", "160"],
+        "ipodclassicgen5": ["30", "60", "80"]
+    };
+
+    $scope.types = [
+        ["Working", "Looks like it has never been used.", "working"],
+        ["Broken", "The phone does not turn on or has seroius physical damage.", "broken"],
+    ];
+    $scope.display_size = false;
+    $scope.display_quality = false;
+    $scope.display_device = true;
+    $scope.device_models = $scope.devices_models['ipodtouch']
+    $scope.device_sizes = $scope.sizes['ipodtouchgen5'];
+
+    $scope.setDevice = function(device, index) {
+        $scope.selectedDeviceIndex = index;
+        $scope.selectDevice = true;
+        $scope.device = device;
+        $scope.display_device = false;
+        $scope.device_models = $scope.devices_models[device]
+    };
+
+    $scope.setDeviceModel = function(device_model, index) {
+        $scope.select_device_model = true;
+        $scope.selected_device_model_index = index;
+        $scope.display_carrier = true;
+        $scope.device_sizes = $scope.sizes[device_model];
+        $scope.device_model = device_model
+    }
+
+    $scope.setCondition = function(condition, index) {
+        $scope.selectedConditionIndex = index;
+        $scope.selectCondition = true;
+        $scope.condition = condition;
+        $scope.display_offer = true;
+    }
+
+    $scope.setSize = function(size, index) {
+        $scope.selectedMemoryIndex = index;
+        $scope.selectMemory = true;
+        $scope.memory = size;
+        $scope.display_quality = true;
+    }
+
+    $scope.offer = function() {
+      if ($scope.selectDevice && $scope.select_device_model && $scope.selectCondition && $scope.selectMemory) {
+        var route = "/" + $scope.device_model + "/" + $scope.memory + "/" + $scope.condition + "/offer";
+        $location.path(route);
+      } else {
+        $scope.missing_selected = true
+      }
+
+    }
+}]);
