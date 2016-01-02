@@ -74,4 +74,6 @@ Rails.application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   config.assets.precompile += %w( bx_loader.gif controls.png)
+
+  config.middleware.use Rack::Prerender, prerender_token: ENV['PRERENDER_TOKEN']
 end
