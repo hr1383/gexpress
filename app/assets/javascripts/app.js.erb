@@ -1,13 +1,12 @@
-var gexpress = angular.module('gexpress', ['ngResource', 'ngRoute', 'ngCookies', 'uiGmapgoogle-maps', 'iphone',
-    'ipod', 'ipad']);
-
-gexpress.config(['$routeProvider', '$locationProvider', '$httpProvider',
-    function($routeProvider, $locationProvider, $httpProvider) {
+var gexpress = angular.module('gexpress', ['ngResource', 'ngRoute', 'ngCookies', 'iphone',
+    'ipod', 'ipad', 'ngRoute','metatags']);
+// 'uiGmapgoogle-maps', 
+gexpress.config(['$routeProvider', '$locationProvider', '$httpProvider', 'MetaTagsProvider',
+    function($routeProvider, $locationProvider, $httpProvider, MetaTagsProvider) {
         $locationProvider.html5Mode(true);
-        $routeProvider
-                   
+        $routeProvider                   
             .when("/", {
-                templateUrl: "<%= asset_path('welcome/index.html') %>"
+                templateUrl: "<%= asset_path('welcome/index.html') %>"                
             })
             .when("/checkout", {
                 templateUrl: "<%= asset_path('welcome/checkout.html') %>"
@@ -42,6 +41,14 @@ gexpress.config(['$routeProvider', '$locationProvider', '$httpProvider',
             .otherwise({
                 redirectTo: "/"
             });
+            MetaTagsProvider
+                .when("/", {
+                    title: "this is a title",
+                    description: "this is meta"
+                }).otherwise({
+            title: 'otherwise',
+            description: 'Another great page'
+          });
         $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
 
     }
@@ -149,19 +156,24 @@ gexpress.controller("checkoutcntrl", ['$scope', '$cookieStore', '$location', '$h
         };
         createOrder = function(address) {
             sku = $cookieStore['sku']
-            $http.post('/orders.json', {
-                'sku': sku,
-                'billing': address,
-                'payment_method': $scope.payment_method
-            }).
-            then(function(response) {
-                $cookieStore['email'] = response['data']['billing_email']
-                $cookieStore['order_id'] = response['data']['order_id']
-                $location.path("/thank-you")
-            }, function(response) {
-                // called asynchronously if an error occurs
-                // or server returns response with an error status.
-            });
+            console.log("sku is" + sku)
+            if (sku == undefined) {
+                $location.path("/")
+            } else {
+                $http.post('/orders.json', {
+                    'sku': sku,
+                    'billing': address,
+                    'payment_method': $scope.payment_method
+                }).
+                then(function(response) {
+                    $cookieStore['email'] = response['data']['billing_email']
+                    $cookieStore['order_id'] = response['data']['order_id']
+                    $location.path("/thank-you")
+                }, function(response) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                });
+            }
         }
         $scope.selectPayment = function(payment) {
             if (payment == 'check') {
@@ -175,7 +187,8 @@ gexpress.controller("checkoutcntrl", ['$scope', '$cookieStore', '$location', '$h
     }
 ]);
 
-gexpress.controller("welcomecontroller", ['$scope', '$location', function($scope, $location) {
+gexpress.controller("welcomecontroller", ['$scope', '$location', '$rootScope',
+    function($scope, $location, $rootScope) {
     $scope.initSlider = function() {
         $(function() {
             // wait till load event fires so all resources are available
@@ -194,7 +207,9 @@ gexpress.controller("welcomecontroller", ['$scope', '$location', function($scope
         });
     };
     $scope.initSlider();
-    // $scope.gotoDiv = function() {
-    //   $location.hash("select-device")
-    // }
+    console.log($rootScope)
 }]);
+
+gexpress.run(function(MetaTags){
+    MetaTags.initialize();
+});

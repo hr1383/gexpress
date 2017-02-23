@@ -25,6 +25,7 @@ class Order
   field :billing_email
   field :paypal_email
   field :order_status
+  field :price
   field :created_at, :type => Date
   field :shipped_on, :type => Date
   field :received_on, :type => Date

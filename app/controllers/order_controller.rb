@@ -11,6 +11,7 @@ class OrderController < ApplicationController
 						  :sku_state => sku['state'],
 						  :sku_carrier => sku['carrier'],
 						  :payment_method => params['payment_method'],
+						  :payment_method => sku['price'],
 						  # :shipping_addr => shipping_address['addr'],
 						  # :shipping_addr1 => shipping_address['addr1'],
 						  # :shipping_city => shipping_address['city'],
@@ -29,14 +30,14 @@ class OrderController < ApplicationController
 						  :created_at => Time.now.strftime("%d/%m/%Y %H:%M"),
 						  :order_status => 'NEW')
 		order.save
-		if Rails.env.production?
-			Emailer.email_admin(order).deliver
-			if order.payment_method == 'check'
-				Emailer.new_order(order.order_id, order.billing_email).deliver
-			else 
-				Emailer.new_order(order.order_id, order.paypal_email).deliver
-			end	
-		end
+		# if Rails.env.production?
+		# 	Emailer.email_admin(order).deliver
+		# 	if order.payment_method == 'check'
+		# 		Emailer.new_order(order.order_id, order.billing_email).deliver
+		# 	else 
+		# 		Emailer.new_order(order.order_id, order.paypal_email).deliver
+		# 	end	
+		# end
 		respond_to do |format|    	
     		format.json  { render :json => order.to_json }
 		end
