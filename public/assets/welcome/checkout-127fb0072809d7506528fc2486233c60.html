@@ -1,0 +1,190 @@
+<div ng-controller="checkoutcntrl">
+<section id="purchase-content">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 purchase-title pull-left">
+				<h2 class="pull-left">Please choose a payment method</h2> <a href="/">				
+			</div>
+			<div class="col-lg-4 purchase-help pull-right">
+				<p class="social-share-wrap">
+					<!-- TODO: fix it , redirect happens if href is removed -->
+					<a href=""></a>
+				</p>
+			</div>
+		</div>
+		<div class="row checkout-box">
+			<div class="col-lg-8">
+				<div class="row gateway-selector" ng-init="payment=check">
+							<div class="col-lg-2">
+								<input type="radio" id="checkcard" name="gateway-selector" value="check" ng-model= "payment_method"  ng-change="selectPayment('check')">
+								<label class="payment-type" for="cheque"><img src="img/gateway-img/1.png" alt=""></label>
+							</div>
+							<div class="col-lg-2">
+								<input type="radio" name="gateway-selector" id="paypal" value="paypal" 
+								ng-model= "payment_method" ng-change="selectPayment('paypal')">
+								<label class="payment-type" for="paypal"><img src="img/gateway-img/2.png" alt=""></label>
+							</div>
+					</div>				
+					<form name="payment" novalidate ng-submit="saveAddr(address)" ng-show="checkSelected">
+						<div class="row form-box">
+							<div class="col-lg-12">
+								<h3 ng-focus>Please provide the address you'd like your check send to</h3>
+							</div>
+							<div class="col-lg-4">
+								<p><label>First Name <abbr class="req" title="required">*</abbr></label></p>
+							</div>
+							<div class="col-lg-8">
+								<p>
+									<input type="text" placeholder="First Name" ng-model="address.fname" name="fname" required>	
+									<span ng-show="payment.fname.$invalid && payment.submitted && checkSelected">&nbsp;Enter First Name.</span>								
+								</p>
+							</div>
+							<div class="col-lg-4">
+								<p><label>Last Name<abbr class="req" title="required">*</abbr></label></p>
+							</div>	
+							<div class="col-lg-8">
+								<p>
+									<input type="text" placeholder="Last Name" ng-model="address.lname" required name="lname">
+									<span ng-show="payment.lname.$invalid && payment.submitted && checkSelected">Enter Last Name.</span>
+								</p>
+							</div>
+							<div class="col-lg-4">
+								<p><label>Address Line 1 <abbr class="req" title="required">*</abbr></label></p>
+							</div>
+							<div class="col-lg-8">	
+								<p>
+									<input type="text" name="addr1" placeholder="Enter Your Address" ng-model="address.addr" required="">
+									<span ng-show="payment.addr1.$invalid && payment.submitted && checkSelected">Enter Address.</span>
+								</p>
+							</div>
+							<div class="col-lg-4">	
+								<p><label>Address Line 2 (Optional):</label></p>
+							</div>
+							<div class="col-lg-8">	
+								<p><input type="text" ng-model="address.addr1" placeholder="Enter Apt#, Building No"></p>
+							</div>
+							<div class="col-lg-4"><p><label>City <abbr class="req" title="required">*</abbr></label></p></div>
+							<div class="col-lg-8">
+								<p>
+									<input type="text" name="city" placeholder="City" ng-model="address.city" required="">
+									<span ng-show="payment.city.$invalid && payment.submitted && checkSelected">Enter City.</span>
+								</p>
+							</div>
+							<div class="col-lg-4"><p><label>State <abbr class="req" title="required">*</abbr></label></p></div>
+							<div class="col-lg-8">
+								<p><input type="text" name="state" placeholder="State" ng-model="address.state" required="">
+								<span ng-show="payment.state.$invalid && payment.submitted && checkSelected">Enter the State.</span>
+								</p>
+							</div>
+							<div class="col-lg-4"><p><label>Zipcode <abbr class="req" title="required">*</abbr></label></p></div>
+							<div class="col-lg-8" ng-class="payment.zip.$invalid && !payment.zip.$pristine">
+								<p>
+									<input type="text" name="zip" placeholder="Enter Zip" ng-model="address.zip" required="">
+									<span ng-show="payment.zip.$invalid && payment.submitted && checkSelected">Enter Zipcode.</span>
+								</p>
+							</div>
+							<div class="col-lg-4"><p><label>Email <abbr class="req" title="required">*</abbr></label></p></div>
+							<div class="col-lg-8" ng-class="payment.email.$invalid && !payment.email.$pristine">
+								<p><input type="text" placeholder="Enter Email" ng-model="address.email" required="" name="email">
+									<span ng-show="payment.email.$invalid && payment.submitted && checkSelected">Enter Email.</span>	
+								</p>
+							</div>
+							<div class="col-lg-4"><p><label>Phone (Optional):</label></p></div>
+							<div class="col-lg-8">
+								<p><input type="text" placeholder="Enter Phone" ng-model="address.phone"></p>
+							</div>							
+							<div class="col-lg-6 pull-right">
+								<p>
+									<button type="submit" class="hvr-bounce-to-right" >Continue <i class="fa fa-angle-right"></i></button>
+								</p>
+							</div>						
+						</div>
+						</form>
+						<form name="paypal_payment" novalidate ng-submit="saveAddr(address)" ng-show="!checkSelected">
+							<div class="row form-box" ng-hide="checkSelected">
+							<div class="col-lg-12">
+								<h3>Enter your email address associated with your PayPal account</h3>
+							</div>
+							<div class="col-lg-4">
+								<p><label>First Name <abbr class="req" title="required">*</abbr></label></p>
+							</div>
+							<div class="col-lg-8">
+								<p>
+									<input type="text" placeholder="First Name" ng-model="address.fname" name="fname" required>	
+									<span ng-show="paypal_payment.fname.$invalid && paypal_payment.submitted && !checkSelected">&nbsp;Enter First Name.</span>								
+								</p>
+							</div>
+							<div class="col-lg-4">
+								<p><label>Last Name<abbr class="req" title="required">*</abbr></label></p>
+							</div>	
+							<div class="col-lg-8">
+								<p>
+									<input type="text" placeholder="Last Name" ng-model="address.lname" required name="lname">
+									<span ng-show="paypal_payment.lname.$invalid && paypal_payment.submitted && !checkSelected">Enter Last Name.</span>
+								</p>
+							</div>
+							<div class="col-lg-4">
+								<p><label>Address Line 1 <abbr class="req" title="required">*</abbr></label></p>
+							</div>
+							<div class="col-lg-8">	
+								<p>
+									<input type="text" name="addr1" placeholder="Enter Your Address" ng-model="address.addr" required="">
+									<span ng-show="paypal_payment.addr1.$invalid && paypal_payment.submitted && !checkSelected">Enter Address.</span>
+								</p>
+							</div>
+							<div class="col-lg-4">	
+								<p><label>Address Line 2 (Optional):</label></p>
+							</div>
+							<div class="col-lg-8">	
+								<p><input type="text" ng-model="address.addr1" placeholder="Enter Apt#, Building No"></p>
+							</div>
+							<div class="col-lg-4"><p><label>City <abbr class="req" title="required">*</abbr></label></p></div>
+							<div class="col-lg-8">
+								<p>
+									<input type="text" name="city" placeholder="City" ng-model="address.city" required="">
+									<span ng-show="paypal_payment.city.$invalid && paypal_payment.submitted && !checkSelected">Enter City.</span>
+								</p>
+							</div>
+							<div class="col-lg-4"><p><label>State <abbr class="req" title="required">*</abbr></label></p></div>
+							<div class="col-lg-8">
+								<p><input type="text" name="state" placeholder="State" ng-model="address.state" required="">
+								<span ng-show="paypal_payment.state.$invalid && paypal_payment.submitted && !checkSelected">Enter the State.</span>
+								</p>
+							</div>
+							<div class="col-lg-4"><p><label>Zipcode <abbr class="req" title="required">*</abbr></label></p></div>
+							<div class="col-lg-8" ng-class="payment.zip.$invalid && !payment.zip.$pristine">
+								<p>
+									<input type="text" name="zip" placeholder="Enter Zip" ng-model="address.zip" required="">
+									<span ng-show="paypal_payment.zip.$invalid && paypal_payment.submitted && !checkSelected">Enter Zipcode.</span>
+								</p>
+							</div>
+							<div class="col-lg-4"><p><label>Phone (Optional):</label></p></div>
+							<div class="col-lg-8">
+								<p><input type="text" placeholder="Enter Phone" ng-model="address.phone"></p>
+							</div>							
+							<div class="col-lg-4"><p><label>Email Address:<abbr class="req" title="required">*</abbr></label></p></div>
+							<div class="col-lg-8">
+								<p><input type="text" placeholder="Enter Email Address" ng-model="address.paypalemail" required="" name="paypalemail">
+									<span ng-show="paypal_payment.paypalemail.$invalid && paypal_payment.submitted && !checkSelected">Enter Email.</span>
+								</p>
+							</div>
+							<div class="col-lg-4"><p><label>Confirm Email Address:<abbr class="req" title="required">*</abbr></label></p></div>
+							<div class="col-lg-8">
+								<p><input type="text" placeholder="Confirm Email Address" ng-model="confirm_email" required="">
+									<span ng-show="paypal_payment.confirm_email.$invalid && paypal_payment.submitted && 
+									!checkSelected && nomatch">Email Address doesn't match.</span>	
+								</p>
+							</div>							
+							<div class="col-lg-6 pull-right">
+								<p>
+									<button type="submit" class="hvr-bounce-to-right">Continue <i class="fa fa-angle-right"></i></button>
+								</p>
+							</div>	
+						</div> <!-- paypal -->
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+</div>
