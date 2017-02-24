@@ -72,7 +72,7 @@ Rails.application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
-
+  # config.assets.precompile =  ['*.js', '*.css', '*.css.erb'] 
   config.assets.precompile += %w( bx_loader.gif controls.png)
 
   config.middleware.use Rack::Prerender, prerender_token: ENV['PRERENDER_TOKEN']

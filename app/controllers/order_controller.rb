@@ -11,7 +11,7 @@ class OrderController < ApplicationController
 						  :sku_state => sku['state'],
 						  :sku_carrier => sku['carrier'],
 						  :payment_method => params['payment_method'],
-						  :payment_method => sku['price'],
+						  :price => sku['price'],
 						  # :shipping_addr => shipping_address['addr'],
 						  # :shipping_addr1 => shipping_address['addr1'],
 						  # :shipping_city => shipping_address['city'],
