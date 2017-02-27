@@ -75,5 +75,5 @@ Rails.application.configure do
   # config.assets.precompile =  ['*.js', '*.css', '*.css.erb'] 
   config.assets.precompile += %w( bx_loader.gif controls.png)
 
-  config.middleware.use Rack::Prerender, prerender_token: ENV['PRERENDER_TOKEN']
+  # config.middleware.use Rack::Prerender, prerender_token: ENV['PRERENDER_TOKEN']
 end
